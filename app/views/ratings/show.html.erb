@@ -1,1 +1,9 @@
-<%= @rating %>
+<% @rating.values.each do |data| %>
+  <%data.each do |key, value| %>
+    <ul>
+      <li>Newest rating: <%= key[:stars] %>!, memebers: <%=key[:member_ids] %>  </li>
+      <li> <%= key[:code]%> - <%=key[:stars] %>! </li>
+      <li> <%= key[:comments] %> </li>
+    </ul>
+<%end %>
+<%end %>

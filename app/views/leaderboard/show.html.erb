@@ -1,1 +1,10 @@
-<%= @leaderboard %>
+<h1>LeaderBoard</h1>
+<%@leaderboard.values.each do |leader|%>
+  <%leader.values.each do |board| %>
+    <%board.each do |key, value| %>
+      <ul>
+        <li> <b>name</b><%= key[:name] %> , <b>rating</b> <%= key[:ratings_average] %>, <%= key[:avatar].values.map {|k,v| k[:small].flatten[1]} %></li>
+      </ul>
+    <%end %>
+    <%end %>
+<%end %>
