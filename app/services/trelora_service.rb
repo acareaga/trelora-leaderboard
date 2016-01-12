@@ -4,28 +4,28 @@ class TreloraService
     @connection = Hurley::Client::new('http://api.mytrelora.com')
   end
 
-  def rating_info
+  def ratings
     parse(connection.get("/ratings?api_key=#{ENV['api_key']}"))
   end
 
-  def ratings_by_transaction(id)
-    parse(connection.get("/transacts?api_key=#{ENV['api_key']}/#{id}/ratings"))
+  def rating_details(id)
+    parse(connection.get("/transacts/#{id}/ratings?api_key=#{ENV['api_key']}"))
   end
 
   def transaction(id)
-    parse(connection.get("/transacts?api_key=#{ENV['api_key']}/#{id}"))
+    parse(connection.get("/transacts/#{id}?api_key=#{ENV['api_key']}"))
   end
 
   def member(id)
-    parse(connection.get("/members?api_key=#{ENV['api_key']}/#{id}"))
+    parse(connection.get("/members/#{id}?api_key=#{ENV['api_key']}"))
   end
 
-  def people(id)
-    parse(connection.get("/people?api_key=#{ENV['api_key']}/#{id}"))
+  def person(id)
+    parse(connection.get("/people/#{id}?api_key=#{ENV['api_key']}"))
   end
 
   def leaderboard
-    parse(connection.get("/ratings?api_key=#{ENV['api_key']}/leaderboard"))
+    parse(connection.get("/ratings/leaderboard?api_key=#{ENV['api_key']}"))
   end
 
   private

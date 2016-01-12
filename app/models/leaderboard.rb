@@ -1,18 +1,15 @@
-class Rating
+class Leaderboard
 
   def self.service
     TreloraService.new
   end
 
-  def self.all
-    service.ratings
-  end
-
-  def self.show(id)
-    service.rating_details(id)
+  def self.show
+    service.leaderboard
   end
 
   private
+
   def self.build_object(data)
     OpenStruct.new(data)
   end
