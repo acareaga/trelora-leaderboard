@@ -1,7 +1,7 @@
 class TreloraService
   attr_reader :connection
   def initialize
-    @connection = Hurley::Client::new('http://api.mytrelora.com/')
+    @connection = Hurley::Client::new('http://api.mytrelora.com')
   end
 
   def rating_info
