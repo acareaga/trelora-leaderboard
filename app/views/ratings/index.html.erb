@@ -1,1 +1,9 @@
-<%= @ratings %>
+<h1>Recent Ratings</h1>
+<ul>
+<% @ratings.values.each do |rating| %>
+  <%rating.each do |key, value| %>
+<li><b>person:</b> <%=key[:person_id] %> ,<b> tranaction code:</b> <%= key[:code]%> <b> comments: </b><%=key[:comments]%>, <b>stars:</b> <%=key[:stars]%> ,<b> employee</b><%=key[:member_ids] %></li>
+<br>
+<%end %>
+<%end %>
+<ul>
