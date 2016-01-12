@@ -31886,3 +31886,16 @@ Started GET "/assets/leader_board.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f
 
 
 Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for ::1 at 2016-01-11 21:21:09 -0700
+
+
+Started GET "/" for ::1 at 2016-01-12 08:12:37 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (5.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/acareaga/.rvm/gems/ruby-2.2.1/gems/railties-4.2.5/lib/rails/templates/rails/welcome/index.html.erb (5.6ms)
+Completed 200 OK in 49ms (Views: 31.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ratings" for ::1 at 2016-01-12 08:12:43 -0700
+Processing by RatingsController#index as HTML
+  Rendered ratings/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 3058ms (Views: 2310.5ms | ActiveRecord: 0.0ms)
