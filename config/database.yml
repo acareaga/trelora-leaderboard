@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: my_trelora_leader_board_production
-  username: my_trelora_leader_board
-  password: <%= ENV['MY_TRELORA_LEADER_BOARD_DATABASE_PASSWORD'] %>

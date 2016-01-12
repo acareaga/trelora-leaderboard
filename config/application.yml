@@ -1,5 +1,6 @@
 production:
   api_key: dHVyaW5nOnR1cmluZw%3D%3D
+  secret_key_base: e541eed101db39137fc453e679f7bc8cc75274a3c1592a7bd45638d7f2a42dbbe7e9fbd3e02cf8517430b4e022db36820141e61411c734b3c57bc6c69a83e65c
 
 development:
   api_key: dHVyaW5nOnR1cmluZw%3D%3D

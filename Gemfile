@@ -10,14 +10,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
-gem 'less-rails', '~> 2.7.0'
-gem 'therubyracer'
-gem 'less-rails-semantic_ui'
-gem 'autoprefixer-rails'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'hurley'
 
 group :development, :test do
   gem 'byebug'
-  gem 'hurley'
   gem 'pry'
 end
 
