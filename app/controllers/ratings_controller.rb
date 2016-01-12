@@ -6,6 +6,5 @@ class RatingsController < ApplicationController
 
   def show
     @rating = Rating.show(params[:id])
-    @transaction = Transaction.show(params[:id]) #<--- poro validate this is the correct transaction
   end
 end
