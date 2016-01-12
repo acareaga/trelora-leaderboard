@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MyTreloraLeaderBoard</title>
+  <title>TRELORA Leaderboard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,14 +9,186 @@
 <body>
 
     <div class="ui text container">
-      <div href="#" class="ui inverted header">
+      <div href="#" class="ui centered header">
         <br>
-        <img class="ui inverted header" src="assets/images/logo.png">
+        <img class="ui small image" src="https://www.mytrelora.com/images/trelora.png">
       </div>
   </div>
 
 <div class="ui container">
+  <br>
   <%= yield %>
+  <br>
+
+<!-- ######### -->
+
+  <div class="ui massive star rating" data-max-rating="5">
+    <i class="icon active"></i>
+    <i class="icon active"></i>
+    <i class="icon active"></i>
+    <i class="icon"></i>
+    <i class="icon"></i>
+  </div>
+
+  <div class="ui statistic">
+    <div class="value">
+      5,550
+    </div>
+    <div class="label">
+      Downloads
+    </div>
+  </div>
+
+  <br>
+
+  <div class="ui statistics">
+  <div class="statistic">
+    <div class="value">
+      22
+    </div>
+    <div class="label">
+      Faves
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      31,200
+    </div>
+    <div class="label">
+      Views
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      22
+    </div>
+    <div class="label">
+      Members
+    </div>
+  </div>
+</div>
+
+<br>
+
+<table class="ui very basic collapsing celled table">
+  <thead>
+    <tr><th>Image</th>
+    <th>Agent</th>
+    <th>Rating</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        <h4 class="ui image header">
+          <img src="http://static1.squarespace.com/static/5602b79ee4b0a65d125ea3c4/t/560b03e6e4b0651fc55387ab/1443562471251/?format=300w" class="ui mini rounded image">
+          <img src="http://static1.squarespace.com/static/5602b79ee4b0a65d125ea3c4/t/560b03e6e4b0651fc55387ab/1443562471251/?format=300w" class="ui mini rounded image">
+        </h4>
+      </td>
+      <td>
+          <div class="content">
+            <h3>Lena & Bob</h3>
+            <!-- <div class="sub header">Human Resources -->
+          </div>
+        </h4>
+      </td>
+      <td>
+        <div class="ui massive star rating" data-max-rating="5">
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4 class="ui image header">
+          <img src="http://static1.squarespace.com/static/5602b79ee4b0a65d125ea3c4/t/5609a368e4b053d700fcd3be/1443472148200/?format=300w" class="ui mini rounded image">
+          <div class="content">
+            Matthew & Toni
+            <div class="sub header">Fabric Design
+          </div>
+        </div>
+      </h4></td>
+      <td>
+        <div class="ui massive heart rating" data-max-rating="5">
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon"></i>
+          <i class="icon"></i>
+          <i class="icon"></i>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4 class="ui image header">
+          <img src="http://static1.squarespace.com/static/5602b79ee4b0a65d125ea3c4/t/5609934be4b0568800793b09/1443468108782/?format=300w" class="ui mini rounded image">
+          <div class="content">
+            Lindsay & Chris
+            <div class="sub header">Entertainment
+          </div>
+        </div>
+      </h4></td>
+      <td>
+        <div class="ui massive star rating" data-max-rating="5">
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon"></i>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4 class="ui image header">
+          <img src="http://static1.squarespace.com/static/5602b79ee4b0a65d125ea3c4/t/560bf1b4e4b0c1fb180bc21d/1443623349675/?format=300w" class="ui mini rounded image">
+          <div class="content">
+            Mark & Jared
+            <div class="sub header">Executive
+          </div>
+        </div>
+      </h4></td>
+      <td>
+        <div class="ui massive heart rating" data-max-rating="5">
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon active"></i>
+          <i class="icon"></i>
+          <i class="icon"></i>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table class="ui inverted green table">
+  <thead>
+    <tr><th>Team</th>
+    <th>Members</th>
+    <th>Rating</th>
+  </tr></thead><tbody>
+    <tr>
+      <td>Apples</td>
+      <td>200</td>
+      <td>0g</td>
+    </tr>
+    <tr>
+      <td>Orange</td>
+      <td>310</td>
+      <td>0g</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<br>
+<!-- ########## -->
+
 </div>
 
 </body>
