@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  root to: 'slider#index'
   get '/ratings', to: 'ratings#index', as: :ratings
   get '/transacts/:id/ratings', to: 'ratings#show', as: :rating_details
   get '/transacts/:id', to: 'transactions#show', as: :transaction
