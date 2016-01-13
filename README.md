@@ -1,6 +1,6 @@
 # Trelora LeaderBoard
 
-The personal project is the final pair project in Module 3 at Turing. It's a Rails and React application that displays internal sales data, customer feedback, and the agent leaderboard on office TV screens.
+The personal project is the final pair project in Module 3 at Turing. It's a Rails and React application that displays internal transaction data, customer feedback, and the agent leaderboard on office TV screens.
 
 [Project Outline](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/self_directed_project.md)
 
