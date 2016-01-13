@@ -2,7 +2,7 @@
 <br>
 <br>
 <div class="ui centered grid">
-  <table class="ui very basic collapsing celled table">
+  <table class="ui very basic celled table">
     <tbody>
       <% @ratings.values.each do |rating| %>
         <%rating.first(5).each do |key, value| %>
@@ -13,22 +13,24 @@
                 <div class="sub header">Lead Agent
               </div>
             </td>
-            <td>
+            <td class="four wide">
               <div class="content">
                 <%= key[:code]%>
               </div>
             </td>
-            <td>
+            <td class="six wide">
               <div class="content">
                 <%=key[:comments]%>
               </div>
             </td>
             <td>
               <div class="ui statistic">
-                <div class="value">
-                  <%=key[:stars]%>
+                <div class="ui mini star rating">
+                  <%key[:stars].times do %>
+                    <i class='icon active'>
+                  <%end %>
                 </div>
-                <div class="label">
+                <div class="content">
                   Rating
                 </div>
               </div>
