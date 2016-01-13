@@ -1,12 +1,72 @@
-<% @rating.values.each do |data| %>
-  <%data.each do |key, value| %>
-    <ul>
-      <li>Newest rating: <%= key[:stars] %>!, memebers: <%=key[:member_ids] %>  </li>
-      <li> <%= key[:code]%> - <%=key[:stars] %>! </li>
-      <li> <%= key[:comments] %> </li>
-    </ul>
-<%end %>
-<%end %>
+<h1>Newest Rating</h1>
+<br>
+<br>
+<div class="ui centered grid">
+  <table class="ui very basic collapsing celled table">
+    <tbody>
+      <% @rating.values.each do |data| %>
+        <%data.each do |key, value| %>
+          <tr>
+            <td>
+              <div class="content">
+                <h3><%=key[:member_ids] %></h3>
+                <div class="sub header">Lead Agent</div>
+              </div>
+            </td>
+            <td>
+              <div class="label">
+                Newest rating: <%= key[:stars] %>!
+              </div>
+            </td>
+          </tr>
+        <%end %>
+      <%end %>
+    </tbody>
+  </table>
+</div>
 
-# TRANSACT END POINT - NEeded
-<%= @transaction %>
+
+<h2>Previous Ratings</h2>
+<div class="ui centered grid">
+  <table class="ui very basic collapsing celled table">
+    <tbody>
+      <% @ratings.values.each do |rating| %>
+        <%rating.first(3).each do |key, value| %>
+          <tr>
+            <td>
+              <div class="content">
+                <h3><%=key[:person_id] %></h3>
+                <div class="sub header">Lead Agent
+              </div>
+            </td>
+            <td>
+              <div class="content">
+                <%= key[:code]%>
+              </div>
+            </td>
+            <td>
+              <div class="content">
+                <%=key[:comments]%>
+              </div>
+            </td>
+            <td>
+              <div class="ui statistic">
+                <div class="value">
+                  <%=key[:stars]%>
+                </div>
+                <div class="label">
+                  Rating
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="content">
+                  <%=key[:member_ids] %>
+              </div>
+            </td>
+          </tr>
+        <%end %>
+      <%end %>
+    </tbody>
+  </table>
+</div>

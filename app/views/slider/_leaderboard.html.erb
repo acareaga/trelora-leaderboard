@@ -1,18 +1,12 @@
 <h1>LeaderBoard</h1>
-
+<br>
+<br>
 <div class="ui centered grid">
-
   <table class="ui very basic collapsing celled table">
-    <thead>
-      <!-- <tr><th>Image</th> -->
-      <!-- <th>Agent</th> -->
-      <!-- <th>Rating</th> -->
-    </tr></thead>
     <tbody>
       <%@leaderboard.values.each do |leader|%>
         <%leader.values.each do |board| %>
           <%board.first(5).each do |key, value| %>
-
           <tr>
             <td>
               <h4 class="ui image header">
@@ -27,7 +21,6 @@
               </h4>
             </td>
             <td>
-
               <div class="ui statistic">
                 <div class="value">
                   <%= key[:ratings_average] %>
@@ -36,14 +29,11 @@
                   Rating
                 </div>
               </div>
-
             </td>
           </tr>
-
           <%end %>
-          <%end %>
+        <%end %>
       <%end %>
-
     </tbody>
   </table>
 </div>
