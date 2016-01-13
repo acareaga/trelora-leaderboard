@@ -1,4 +1,4 @@
-class LeaderboardController < ApplicationController
+[class LeaderboardController < ApplicationController
 
   def show
     @leaderboard = Leaderboard.show

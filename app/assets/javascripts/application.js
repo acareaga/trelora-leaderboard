@@ -14,4 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require semantic-ui
+//= require jquery.slick
 //= require_tree .
+$(document).ready(function(){
+  $('.slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1 ,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false
+  });
+});

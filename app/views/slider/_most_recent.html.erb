@@ -1,0 +1,62 @@
+<h1>Recent Ratings</h1>
+<br>
+<br>
+  <div class="ui centered grid">
+
+    <table class="ui very basic collapsing celled table">
+      <thead>
+        <!-- <tr><th>Person</th>
+        <th>Transaction Code</th>
+        <th>Comment</th>
+        <th>Rating</th>
+        <th>Photo</th> -->
+      </tr></thead>
+
+      <tbody>
+        <% @ratings.values.each do |rating| %>
+          <%rating.first(5).each do |key, value| %>
+
+            <tr>
+              <td>
+                <div class="content">
+                  <h3><%=key[:person_id] %></h3>
+                  <div class="sub header">Lead Agent
+                </div>
+              </td>
+
+                <td>
+                  <div class="content">
+                    <%= key[:code]%>
+                  </div>
+                </td>
+
+                <td>
+                  <div class="content">
+                    <%=key[:comments]%>
+                  </div>
+                </td>
+
+              <td>
+                <div class="ui statistic">
+                  <div class="value">
+                    <%=key[:stars]%>
+                  </div>
+                  <div class="label">
+                    Rating
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div class="content">
+                    <%=key[:member_ids] %>
+                </div>
+              </td>
+            </tr>
+
+          <%end %>
+        <%end %>
+
+      </tbody>
+    </table>
+  </div>
