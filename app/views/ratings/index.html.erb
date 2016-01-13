@@ -1,9 +1,69 @@
 <h1>Recent Ratings</h1>
-<ul>
-<% @ratings.values.each do |rating| %>
-  <%rating.each do |key, value| %>
-<li><b>person:</b> <%=key[:person_id] %> ,<b> tranaction code:</b> <%= key[:code]%> <b> comments: </b><%=key[:comments]%>, <b>stars:</b> <%=key[:stars]%> ,<b> employee</b><%=key[:member_ids] %></li>
 <br>
-<%end %>
-<%end %>
-<ul>
+<br>
+  <div class="ui centered grid">
+
+    <table class="ui very basic collapsing celled table">
+      <thead>
+        <tr><th>Person</th>
+        <th>Transaction Code</th>
+        <th>Comment</th>
+        <th>Rating</th>
+        <th>Photo</th>
+
+      </tr></thead>
+      <tbody>
+        <% @ratings.values.each do |rating| %>
+          <%rating.each do |key, value| %>
+
+            <tr>
+              <td>
+                  <div class="content">
+                    <h3><%=key[:person_id] %></h3>
+                    <div class="sub header">Lead Agent
+                  </div>
+              </td>
+
+                <td>
+                    <div class="content">
+                      <%= key[:code]%>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="content">
+                      <%=key[:comments]%>
+                    </div>
+                </td>
+
+              <td>
+                <div class="ui statistic">
+                  <div class="value">
+                    <%=key[:stars]%>
+                  </div>
+                  <div class="label">
+                    Rating
+                  </div>
+                </div>
+
+              </td>
+
+              <td>
+                <div class="ui statistic">
+                  <div class="value">
+                    <%=key[:member_ids] %>
+                  </div>
+                  <div class="label">
+                    Rating
+                  </div>
+                </div>
+              </td>
+
+            </tr>
+
+          <%end %>
+        <%end %>
+
+      </tbody>
+    </table>
+  </div>
