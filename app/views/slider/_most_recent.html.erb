@@ -9,18 +9,18 @@
           <tr>
             <td>
               <div class="content">
-                <h3><%=key[:person_id] %></h3>
-                <div class="sub header">Lead Agent
+                <h3><%= key[:person_id] %></h3>
+                <div class="sub header">Customer
               </div>
             </td>
             <td class="four wide">
               <div class="content">
-                <%= key[:code]%>
+                <h3><%= key[:code]%></h3>
               </div>
             </td>
             <td class="six wide">
               <div class="content">
-                <%=key[:comments]%>
+                <h3>"<%=key[:comments]%>"</h3>
               </div>
             </td>
             <td>
@@ -44,5 +44,6 @@
         <%end %>
       <%end %>
     </tbody>
+    <br>
   </table>
 </div>
