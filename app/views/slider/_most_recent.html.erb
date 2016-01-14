@@ -24,14 +24,13 @@
             </td>
             <td>
               <div class="ui statistic">
-                <div class="ui mini star rating" data-rating= "<%= key[:stars] %>" data-max-rating="5">
+                <div class="ui small star rating" data-rating= "<%= key[:stars] %>" data-max-rating="5">
                   <%key[:stars].times do %>
                     <i class='icon active'>
                   <%end %>
                   <%key[:star_diff].times do %>
                     <i class='icon'>
                   <%end %>
-
                 </div>
                 <div class="content">
                   Rating
