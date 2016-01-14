@@ -2,33 +2,37 @@
 <br>
 <br>
 <div class="ui centered grid">
-  <table class="ui very basic collapsing celled table">
+  <table class="ui very basic celled table">
     <tbody>
-      <% @ratings.values.each do |rating| %>
-        <%rating.first(5).each do |key, value| %>
+        <%@ratings.first(5).each do |key, value| %>
           <tr>
             <td>
               <div class="content">
-                <h3><%=key[:person_id] %></h3>
-                <div class="sub header">Lead Agent
+                <h3><%= key[:person_id] %></h3>
+                <div class="sub header">Customer
               </div>
             </td>
-            <td>
+            <td class="four wide">
               <div class="content">
-                <%= key[:code]%>
+                <h3><%= key[:code]%></h3>
               </div>
             </td>
-            <td>
+            <td class="six wide">
               <div class="content">
-                <%=key[:comments]%>
+                <h3>"<%=key[:comments]%>"</h3>
               </div>
             </td>
             <td>
               <div class="ui statistic">
-                <div class="value">
-                  <%=key[:stars]%>
+                <div class="ui small star rating" data-rating= "<%= key[:stars] %>" data-max-rating="5">
+                  <%key[:stars].times do %>
+                    <i class='icon active'>
+                  <%end %>
+                  <%key[:star_diff].times do %>
+                    <i class='icon'>
+                  <%end %>
                 </div>
-                <div class="label">
+                <div class="content">
                   Rating
                 </div>
               </div>
@@ -39,8 +43,8 @@
               </div>
             </td>
           </tr>
-        <%end %>
       <%end %>
     </tbody>
+    <br>
   </table>
 </div>

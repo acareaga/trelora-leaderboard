@@ -4,8 +4,7 @@
 <div class="ui centered grid">
   <table class="ui very basic collapsing celled table">
     <tbody>
-      <% @rating.values.each do |data| %>
-        <%data.each do |key, value| %>
+        <%@rating.each do |key, value| %>
           <tr>
             <td>
               <div class="content">
@@ -20,7 +19,6 @@
             </td>
           </tr>
         <%end %>
-      <%end %>
     </tbody>
   </table>
 </div>
@@ -30,8 +28,7 @@
 <div class="ui centered grid">
   <table class="ui very basic collapsing celled table">
     <tbody>
-      <% @ratings.values.each do |rating| %>
-        <%rating.first(3).each do |key, value| %>
+        <%@ratings.first(3).each do |key, value| %>
           <tr>
             <td>
               <div class="content">
@@ -66,7 +63,6 @@
             </td>
           </tr>
         <%end %>
-      <%end %>
     </tbody>
   </table>
 </div>
