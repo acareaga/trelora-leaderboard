@@ -4,8 +4,7 @@
 <div class="ui centered grid">
   <table class="ui very basic celled table">
     <tbody>
-      <% @ratings.values.each do |rating| %>
-        <%rating.first(5).each do |key, value| %>
+        <%@ratings.first(5).each do |key, value| %>
           <tr>
             <td>
               <div class="content">
@@ -25,7 +24,7 @@
             </td>
             <td>
               <div class="ui statistic">
-                <div class="ui mini star rating">
+                <div class="ui mini star rating" data-rating= "<%= key[:stars] %>" data-max-rating="5">
                   <%key[:stars].times do %>
                     <i class='icon active'>
                   <%end %>
@@ -41,7 +40,6 @@
               </div>
             </td>
           </tr>
-        <%end %>
       <%end %>
     </tbody>
     <br>

@@ -5,7 +5,8 @@ class Leaderboard
   end
 
   def self.show
-    service.leaderboard
+    data = service.leaderboard
+    build_object(data).leaderboard.fetch(:members)
   end
 
   private

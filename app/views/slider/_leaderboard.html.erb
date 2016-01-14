@@ -4,9 +4,7 @@
 <div class="ui centered grid">
   <table class="ui very basic collapsing celled table">
     <tbody>
-      <%@leaderboard.values.each do |leader|%>
-        <%leader.values.each do |board| %>
-          <%board.first(5).each do |key, value| %>
+          <%@leaderboard.first(5).each do |key, value| %>
           <tr>
             <td>
               <h4 class="ui image header">
@@ -32,8 +30,6 @@
             </td>
           </tr>
           <%end %>
-        <%end %>
-      <%end %>
     </tbody>
   </table>
   <br>

@@ -5,11 +5,13 @@ class Rating
   end
 
   def self.all
-    service.ratings
+    data = service.ratings
+    build_object(data).ratings
   end
 
   def self.show(id)
-    service.rating_details(id)
+    data = service.rating_details(id)
+    build_object(data).ratings
   end
 
   private
