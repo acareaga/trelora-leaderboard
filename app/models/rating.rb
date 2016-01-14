@@ -1,17 +1,26 @@
 class Rating
-
+  attr_accessor :ratings
   def self.service
     TreloraService.new
   end
 
   def self.all
     data = service.ratings
-    build_object(data).ratings
+    @ratings = build_object(data).ratings
+    rating_with_star_diff
   end
 
   def self.show(id)
     data = service.rating_details(id)
-    build_object(data).ratings
+    @ratings = build_object(data).ratings
+    rating_with_star_diff
+  end
+
+  def self.rating_with_star_diff
+    @ratings.each do |rating|
+      difference = 5 - rating[:stars]
+      rating[:star_diff] = difference
+    end
   end
 
   private
