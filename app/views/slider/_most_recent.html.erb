@@ -1,50 +1,12 @@
-<h1>Recent Ratings</h1>
+<h1>Most Recent Ratings</h1>
 <br>
 <br>
 <div class="ui centered grid">
-  <table class="ui very basic celled table">
+  <table class="ui very basic collapsing celled table">
     <tbody>
-        <%@ratings.first(5).each do |key, value| %>
-          <tr>
-            <td>
-              <div class="content">
-                <h3><%= key[:person_id] %></h3>
-                <div class="sub header">Customer
-              </div>
-            </td>
-            <td class="four wide">
-              <div class="content">
-                <h3><%= key[:code]%></h3>
-              </div>
-            </td>
-            <td class="six wide">
-              <div class="content">
-                <h3>"<%=key[:comments]%>"</h3>
-              </div>
-            </td>
-            <td>
-              <div class="ui statistic">
-                <div class="ui small star rating" data-rating= "<%= key[:stars] %>" data-max-rating="5">
-                  <%key[:stars].times do %>
-                    <i class='icon active'>
-                  <%end %>
-                  <%key[:star_diff].times do %>
-                    <i class='icon'>
-                  <%end %>
-                </div>
-                <div class="content">
-                  Rating
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="content">
-                  <%=key[:member_ids] %>
-              </div>
-            </td>
-          </tr>
-      <%end %>
+      <div id="most_recent_ratings">
+      </div>
     </tbody>
-    <br>
   </table>
+  <br>
 </div>
