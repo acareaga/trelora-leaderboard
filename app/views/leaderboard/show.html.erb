@@ -1,49 +1,36 @@
 <h1>LeaderBoard</h1>
-
+<br>
+<br>
 <div class="ui centered grid">
-
   <table class="ui very basic collapsing celled table">
-    <thead>
-      <!-- <tr><th>Image</th> -->
-      <!-- <th>Agent</th> -->
-      <!-- <th>Rating</th> -->
-    </tr></thead>
     <tbody>
-      <%@leaderboard.values.each do |leader|%>
-        <%leader.values.each do |board| %>
-          <%board.each do |key, value| %>
-
+          <%@leaderboard.first(5).each do |key, value| %>
           <tr>
             <td>
               <h4 class="ui image header">
-                <img src="<%= key[:avatar].values.first[:url] %>" class="ui mini rounded image">
+                <img src="<%= key[:avatar].values.first[:url] %>" class="ui tiny circular image">
               </h4>
             </td>
             <td>
                 <div class="content">
-                  <h3><%= key[:name] %></h3>
+                  <h2><%= key[:name] %></h2>
                   <div class="sub header">Lead Agent
                 </div>
               </h4>
             </td>
             <td>
-
               <div class="ui statistic">
                 <div class="value">
-                  <%= key[:ratings_average] %>
+                  <%= key[:ratings_average].round(1) %>
                 </div>
                 <div class="label">
                   Rating
                 </div>
               </div>
-
             </td>
           </tr>
-
           <%end %>
-          <%end %>
-      <%end %>
-
     </tbody>
   </table>
+  <br>
 </div>
