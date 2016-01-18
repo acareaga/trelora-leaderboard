@@ -1,6 +1,5 @@
 function renderLeaderboard(agent) {
 
-
   var rows = agent.members.slice(0, 5).map(function(member) {
     return (
          "<tr>"
@@ -8,7 +7,7 @@ function renderLeaderboard(agent) {
           +"<h4 class='ui image header'>"
             +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
           +"</h4>"
-        +"</td>"
+        +"</td>"†
         +"<td>"
           +"<div class='content'>"
           +"<h2>"+ member.name +"</h2>"

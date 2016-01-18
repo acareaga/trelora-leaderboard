@@ -17,6 +17,8 @@ gem 'jquery-slick-rails'
 group :development, :test do
   gem 'byebug'
   gem 'pry'
+  gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do
