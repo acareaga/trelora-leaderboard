@@ -1,6 +1,4 @@
 function renderMostRecentRatings(rating) {
-
-  debugger;
   var starDifference = rating.slice(0, 5).map(function(feedback){return feedback.star_diff = 5 - feedback.stars})
   var rows = rating.slice(0, 5).map(function(feedback) {
     return (

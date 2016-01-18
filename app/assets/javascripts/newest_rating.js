@@ -1,5 +1,16 @@
-function renderNewestRating(rating) {
+function fetchTransactionId(allRatings){
 
+  var transaction = allRatings.slice(0,1).map(function(transactId){
+    return (
+      transactId.transact_id
+    )
+  });
+  transactUrl = transaction[0]
+  fetchNewestRating(transactUrl)
+}
+
+
+function renderNewestRating(rating) {
 
   var rows = rating.slice(0, 5).map(function(transaction) {
     return (
@@ -22,14 +33,30 @@ function renderNewestRating(rating) {
         +"</td></tr>"
       )
   });
-
   $("#newest_rating").empty().append(rows)
 };
 
-function fetchNewestRating() {
+
+function fetchMostRecentTransactionFromRatings() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/transacts/1911/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url:  "http://api.mytrelora.com/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    success: function(data) {
+      $.each(data, function(index, allRatings) {
+        fetchTransactionId(allRatings)
+      }
+    )},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  })
+};
+
+
+function fetchNewestRating(transactUrl) {
+  $.ajax({
+    type: "GET",
+    url:  "http://api.mytrelora.com/transacts/"+transactUrl+"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
     success: function(ratings) {
       $.each(ratings, function(index, rating) {
         renderNewestRating(rating)
