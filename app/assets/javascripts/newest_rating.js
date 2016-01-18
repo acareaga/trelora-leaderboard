@@ -56,7 +56,7 @@ function fetchMostRecentTransactionFromRatings() {
 function fetchNewestRating(transactUrl) {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/transacts/"+transactUrl+"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url:  "http://api.mytrelora.com/transacts/"+ transactUrl +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
     success: function(ratings) {
       $.each(ratings, function(index, rating) {
         renderNewestRating(rating)
