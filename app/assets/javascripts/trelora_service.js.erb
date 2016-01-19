@@ -63,7 +63,6 @@ function fetchNewestRating(transaction) {
 
 
 
-
 // setInterval(fetchPreviousRatingsForTransactionId, 300000);
 
 function fetchPreviousRatingsForTransactionId(rating) {
@@ -79,24 +78,15 @@ function fetchRatingDataForPreviousTransactions(transactId) {
     type: "GET",
     url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=<%= ENV['api_key'] %>",
     success: function(transact) {
-      a = Object.keys(transact.ratings).reduce(function(collector, key) {
+      arrayOfPreviousTransactions = Object.keys(transact.ratings).reduce(function(collector, key) {
         collector.push(transact.ratings[key])
         return collector;
       }, [])
-      console.log(a);
-
+      renderPreviousRatingTransactions(arrayOfPreviousTransactions)
     }
   })
 };
 
-// function fetchTransactionSpecificRatingData(rating) {
-//   debugger;
-//   var transact_data = rating.map(function(transaction){
-//     previousTransactionRatings.push(transaction)
-//   })
-//   debugger;
-//   console.log(previousTransactionRatings)
-// };
 
 
 

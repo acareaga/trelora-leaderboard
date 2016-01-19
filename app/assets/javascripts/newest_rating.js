@@ -59,9 +59,7 @@ function renderMemberName(rating){
 
 function renderPhotoToPage(photograph){
   var pic = photograph
-  var memberCirclePhoto =
-
-  "<img src='"+ photograph +" 'class='ui tiny circular image'>"
+  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui tiny circular image'>"
 
   $("#member_photo").append(memberCirclePhoto)
 };
@@ -74,18 +72,17 @@ function renderCustomerName(customerName){
   $("#customer_name").append(customerName)
 };
 
-function renderPreviousRatingTransactions(previousTransactionRatings){
-  debugger;
-  var rows = previousTransactionRatings.slice(1, 2).map(function(transaction) {
+function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
+  var rows = arrayOfPreviousTransactions.slice(1, 2).map(function(transaction) {
     return (
       +"<tr>"
-       +"<td>"
+       +"<td class='six wide'>"
          +"<div class='content'>"
          +"<h3>"+ transaction.person_id +"</h3>"
          +"<div class='sub header'>Customer"
          +"</div>"
        +"</td>"
-       +"<td class='four wide'>"
+       +"<td class='six wide'>"
          +"<div class='content'>"
          +"<h3>"+ transaction.created_at +"</h3>"
          +"</div>"
