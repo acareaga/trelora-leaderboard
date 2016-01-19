@@ -22,19 +22,18 @@ function renderNewestRating(rating) {
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
-          +"<div class='six wide column' id='previous_transaction'"+ index +"></div>"
-
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
-          // +"<div class='sixteen wide column'></div>"
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
+          // +"<div class='six wide column' id='previous_transaction'"+ index +"></div>"
+          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          +"<div class='one wide column'></div>"
+          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          +"<div class='six wide column'></div>"
+          +"<div class='three wide column'>_STAR RATING_</div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          +"<div class='one wide column'></div>"
+          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          +"<div class='six wide column'></div>"
+          +"<div class='three wide column'>_STAR RATING_</div>"
       )
   });
   $("#newest_rating").empty().append(row)
@@ -77,18 +76,18 @@ function renderCustomerName(customerName){
   $("#customer_name").append(customerName)
 };
 
-function renderPreviousRatingTransactions(previousTransactionRatings){
-  var row = previousTransactionRatings.map(function(transaction,index) {
-    return (
-      +"<div class='two wide column'><h3>" + transaction.person_id + "</h3></div>"
-      +"<div class='one wide column'></div>"
-      +"<div class='four wide column'><h3>" + transaction.created_at + "</h3></div>"
-      +"<div class='six wide column'></div>"
-      +"<div class='three wide column'>" + transaction.stars +"</div>"
-      +"<div class='sixteen wide column'></div>"
-    )}
-  $("#previous_transaction").append(row[0])
-};
+// function renderPreviousRatingTransactions(previousTransactionRatings){
+//   var row = previousTransactionRatings.map(function(transaction,index) {
+//     return (
+//       +"<div class='two wide column'><h3>" + transaction.person_id + "</h3></div>"
+//       +"<div class='one wide column'></div>"
+//       +"<div class='four wide column'><h3>" + transaction.created_at + "</h3></div>"
+//       +"<div class='six wide column'></div>"
+//       +"<div class='three wide column'>" + transaction.stars +"</div>"
+//       +"<div class='sixteen wide column'></div>"
+//     )}
+//   $("#previous_transaction").append(row[0])
+// };
 
 // function renderPreviousRatingCustomerName(nameCollection){
 //   var name =  nameCollection.map(function(personName, index){
