@@ -1,4 +1,3 @@
-
 function slider() {
   $('.slider').slick({
     slidesToShow: 1,

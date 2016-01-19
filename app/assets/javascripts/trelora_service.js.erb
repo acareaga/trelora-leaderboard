@@ -40,7 +40,7 @@ function fetchNewestRating(transactUrl) {
         renderMemberName(rating)
         fetchTransactionCode(rating)
         fetchCustomerName(rating)
-        fetchPreviousRatingsForTransactionId(rating)
+        fetchTransactionIdForPreviousRatings(rating)
       }
     )},
     error: function(xhr) {
@@ -49,26 +49,48 @@ function fetchNewestRating(transactUrl) {
   })
 };
 
-var previousTransactionRatings = []
 
-function fetchPreviousRatingsForTransactionId(rating) {
+
+
+
+function fetchTransactionIdForPreviousRatings(rating) {
   var transactId = rating.map(function(transaction){
     return (transaction.transact_id)
   })
+  fetchRatingDataForPreviousTransactions(transactId[0])
+};
+
+
+function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
     type: "GET",
-    // " + transactId + " add where 1911
-    url: "http://api.mytrelora.com/transacts/1911/ratings?api_key=<%= ENV['api_key'] %>",
-    success: function(ratings) {
-      $.each(ratings, function(index, previousRatings) {
-        var previousTransaction = previousRatings.id
-        previousTransactionRatings.push(previousTransaction)
-        // renderPreviousRatingTransactions(previousTransactionRatings)
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(transact) {
+      a = Object.keys(transact.ratings).reduce(function(collector, key) {
+        collector.push(transact.ratings[key])
+        return collector;
+      }, [])
+      console.log(a);
+      // $.each(rating, function (index, rating) {
+      //   ratingCollection.push(rating)
+      // })
     }
-  )},
   })
-
 };
+
+function fetchTransactionSpecificRatingData(rating) {
+  debugger;
+  var transact_data = rating.map(function(transaction){
+    previousTransactionRatings.push(transaction)
+  })
+  debugger;
+  console.log(previousTransactionRatings)
+};
+
+
+
+
+
 
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
@@ -129,8 +151,6 @@ function fetchMemberPhoto(collectionOfMemberIds){
       )
 
   });
-
-    console.log(memberCollection)
     // setTimeout(function(){renderMembers(memberCollection)}, 1000);
 };
 

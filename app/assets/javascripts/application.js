@@ -17,13 +17,13 @@
 //= require jquery.slick
 //= require_tree .
 
-$(document).ready(function(){
-  fetchLeaderboard()
-  fetchMostRecentRatings()
-  fetchMostRecentTransactionFromRatings()
-  fetchNewestRating()
-  slider()
-});
+// $(document).ready(function(){
+//   fetchLeaderboard()
+//   fetchMostRecentRatings()
+//   fetchMostRecentTransactionFromRatings()
+//   fetchNewestRating()
+//   slider()
+// });
 
 // <script> LOAD CONTENT ON INTERVAL
 // function loadNowPlaying(){
