@@ -1,62 +1,37 @@
 <h1>Recent Ratings</h1>
 <br>
 <br>
-  <div class="ui centered grid">
 
-    <table class="ui very basic collapsing celled table">
-      <thead>
-        <!-- <tr><th>Person</th>
-        <th>Transaction Code</th>
-        <th>Comment</th>
-        <th>Rating</th>
-        <th>Photo</th> -->
-      </tr></thead>
-
-      <tbody>
-        <% @ratings.values.each do |rating| %>
-          <%rating.each do |key, value| %>
-
-            <tr>
-              <td>
-                <div class="content">
-                  <h3><%=key[:person_id] %></h3>
-                  <div class="sub header">Lead Agent
-                </div>
-              </td>
-
-                <td>
-                  <div class="content">
-                    <%= key[:code]%>
-                  </div>
-                </td>
-
-                <td>
-                  <div class="content">
-                    <%=key[:comments]%>
-                  </div>
-                </td>
-
-              <td>
-                <div class="ui statistic">
-                  <div class="value">
-                    <%=key[:stars]%>
-                  </div>
-                  <div class="label">
-                    Rating
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="content">
-                    <%=key[:member_ids] %>
-                </div>
-              </td>
-            </tr>
-
-          <%end %>
-        <%end %>
-
-      </tbody>
-    </table>
-  </div>
+<div class="ui grid">
+  <div class="one wide column">_ICON_</div>
+  <div class="four wide column"><h2>New Rating: _STARS_!</h2></div>
+  <div class="eight wide column"></div>
+  <div class="three wide column">_MEMBER PICS_</div>
+  <div class="sixteen wide column"></div>
+  <div class="four wide column"></div>
+  <div class="four wide column"><h3>_TRANSACTION CODE_</h3></div>
+  <div class="four wide column"><h3>- _STARS_ !</h3></div>
+  <div class="four wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="four wide column"></div>
+  <div class="four wide column"><h3>_CUSTOMER NAME_</h3></div>
+  <div class="four wide column"><h3>_CUSTOMER CODE_</h3></div>
+  <div class="four wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="two wide column"></div>
+  <div class="twelve wide column"><h1>_CUSTOMER COMMENTS WILL RECENTER WITH MORE TEXT_</h1></div>
+  <div class="two wide column"></div>
+  <div class="sixteen wide column"></div>
+  <div class="sixteen wide column"><h2>Previous Ratings</h2></div>
+  <div class="two wide column"><h3>_PERSON_</h3></div>
+  <div class="one wide column"></div>
+  <div class="four wide column"><h3>_TIME SINCE MOST RECENT_</h3></div>
+  <div class="six wide column"></div>
+  <div class="three wide column">_STAR RATING_</div>
+  <div class="sixteen wide column"></div>
+  <div class="two wide column"><h3>_PERSON_</h3></div>
+  <div class="one wide column"></div>
+  <div class="four wide column"><h3>_TIME SINCE MOST RECENT_</h3></div>
+  <div class="six wide column"></div>
+  <div class="three wide column">_STAR RATING_</div>
+</div>

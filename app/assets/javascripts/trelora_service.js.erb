@@ -21,6 +21,7 @@ function fetchMostRecentRatings() {
       $.each(ratings, function(index, rating) {
         renderMostRecentRatings(rating)
         fetchPersonId(rating)
+        fetchMemberId(rating)
       }
     )},
     error: function(xhr) {
@@ -54,7 +55,27 @@ $.ajax({
    renderPhotoToPage(photograph)
   }
   })
-}
+};
+
+function fetchMemberPhoto(collectionOfMemberIds){
+  collectionOfMemberIds.map(function(member){
+
+      return (
+        $.ajax({
+          type: "GET",
+          url: "http://api.mytrelora.com/members/"+ member +"?api_key=<%= ENV['api_key'] %>",
+          success:function(member){
+            $.each(member, function (index, member) {
+              memberCollection.push(member)
+            })
+          }
+        })
+      )
+
+  });
+    console.log(memberCollection)
+    setTimeout(function(){renderMembers(memberCollection)}, 1000);
+};
 
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
@@ -85,5 +106,5 @@ personIdArray.map(function(people){
     })
   )
 });
-setTimeout(function(){renderNames(nameCollection)}, 1000);
-}
+  setTimeout(function(){renderNames(nameCollection)}, 1000);
+};

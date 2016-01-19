@@ -7,34 +7,84 @@ function fetchTransactionId(allRatings){
   transactUrl = transaction[0]
   fetchNewestRating(transactUrl)
 }
-          +"<h4 class='ui image header'>"
-          +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
-          +"</h4>"
-
 
 function renderNewestRating(rating) {
-  var rows = rating.slice(0, 1).map(function(transaction) {
+  var row = rating.slice(0, 1).map(function(transaction) {
+    // debugger;
     return (
-         "<tr>"
-        +"<td>"
-        +"<h4 class='ui image header' id='member_photo'>"
+        //  "<tr>"
+        // +"<td>"
+        // +"<h4 class='ui image header' id='member_photo'>"
+        // +"</h4>"
+        //   +"</td></div>"
+        //
+        //   +"<td>"
+        //   +"<div class='ui statistic'>"
+        //     +"<div class='value'>"
+        //       + "Newest Rating: " + transaction.stars.toFixed(1)
+        //     +"</div>"
+        //     +"<div class='label'>"
+        //       +"Rating"
+        //     +"</div>"
+        //   +"</div><br><br>"
+        // +"</td></tr>"
+        //
+        //
+        // +"<td>"
+        //   +"<div class='content'>"
+        //   +"<h3 id='people'></h3>"
+        //   +"<div class='sub header'>Customer"
+        //   +"</div>"
+        // +"</td>"
+        //
+        // +"<tr>"
+        // +"<td class='six wide'>"
+        //   +"<div class='content'>"
+        //   +"<h3>"+ transaction.comments +"</h3>"
+        //   +"</div>"
+        //   +"<td>"
+        // +"<td class='four wide'>"
+        //   +"<div class='content'>"
+        //   +"<h3>"+ transaction.code +"</h3>"
+        //   +"</div>"
+        // +"</td></tr>"
 
-        +"</h4>"
-          +"</div>"
-        +"</td>"
-          +"<td>"
-          +"<div class='ui statistic'>"
-            +"<div class='value'>"
-              + transaction.stars.toFixed(1)
-            +"</div>"
-            +"<div class='label'>"
-              +"Rating"
-            +"</div>"
-          +"</div><br><br>"
-        +"</td></tr>"
+          "<div class='ui grid'>"
+          +"<div class='one wide column'>_ICON_</div>"
+          +"<div class='four wide column'><h2>New Rating: " + transaction.stars.toFixed(0) + "!</h2></div>"
+          +"<div class='eight wide column'></div>"
+          +"<div class='three wide column'>_MEMBER PICS_</div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='four wide column'></div>"
+          +"<div class='four wide column'><h2>"+ transaction.code +"</h2></div>"
+          +"<div class='four wide column'><h2>- " + transaction.stars.toFixed(0) + " Stars!</h2></div>"
+          +"<div class='four wide column'></div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='four wide column'></div>"
+          +"<div class='four wide column'><h3>_CUSTOMER NAME_</h3></div>"
+          +"<div class='four wide column'><h3>_TRANSACTION CODE_</h3></div>"
+          +"<div class='four wide column'></div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='twelve wide column'><h1>"+ transaction.comments +"</h1></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
+          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          +"<div class='one wide column'></div>"
+          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          +"<div class='six wide column'></div>"
+          +"<div class='three wide column'>_STAR RATING_</div>"
+          +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          +"<div class='one wide column'></div>"
+          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          +"<div class='six wide column'></div>"
+          +"<div class='three wide column'>_STAR RATING_</div>"
       )
   });
-  $("#newest_rating").empty().append(rows)
+
+  $("#newest_rating").empty().append(row)
 };
 
 function renderMemberName(rating){
