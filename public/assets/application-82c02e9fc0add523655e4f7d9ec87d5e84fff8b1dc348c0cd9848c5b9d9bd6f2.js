@@ -37127,16 +37127,21 @@ function renderLeaderboard(agent) {
 
   $("#leaderboard").empty().append(rows)
 };
+$(document).ready(function(){
+  fetchLeaderboard()
+  fetchMostRecentRatings()
+  fetchMostRecentTransactionFromRatings()
+  fetchNewestRating()
+  slider()
+});
 function fetchMemberId(rating){
   var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
-    return(
-      memberIds.member_ids
-    )
+    return(memberIds.member_ids)
   });
   fetchMemberPhoto(collectionOfMemberIds)
-  console.log(collectionOfMemberIds[2])
 };
 
+// avoud globals
 var memberCollection = []
 
 // function renderMemberName(rating){
@@ -37206,6 +37211,10 @@ function renderNewestRating(rating) {
           +"<div class='eight wide column'></div>"
           +"<div class='three wide column'><h4 class='ui image header' id='member_photo'></h4></div>"
           +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
           +"<div class='four wide column'><h2>"+ transaction.code +"</h2></div>"
           +"<div class='four wide column'><h2>- " + transaction.stars.toFixed(0) + " Stars!</h2></div>"
@@ -37216,43 +37225,37 @@ function renderNewestRating(rating) {
           +"<div class='six wide column'><h3 id='transaction_code'></h3></div>"
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
-          +"<div class='two wide column'></div>"
-          +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
-          +"<div class='two wide column'></div>"
-          +"<div class='sixteen wide column'></div>"
           +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
+
+          +"<table class='ui very basic collapsing celled table'>"
+            +"<tbody id='previous_transaction'>"
+            +"</tbody>"
+          +"</table>"
+
           // +"<div class='six wide column' id='previous_transaction'"+ index +"></div>"
-          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          +"<div class='one wide column'></div>"
-          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          +"<div class='six wide column'></div>"
-          +"<div class='three wide column'>_STAR RATING_</div>"
-          +"<div class='sixteen wide column'></div>"
-          +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          +"<div class='one wide column'></div>"
-          +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          +"<div class='six wide column'></div>"
-          +"<div class='three wide column'>_STAR RATING_</div>"
+          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          // +"<div class='one wide column'></div>"
+          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          // +"<div class='six wide column'></div>"
+          // +"<div class='three wide column'>_STAR RATING_</div>"
+          // +"<div class='sixteen wide column'></div>"
+          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
+          // +"<div class='one wide column'></div>"
+          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
+          // +"<div class='six wide column'></div>"
+          // +"<div class='three wide column'>_STAR RATING_</div>"
       )
   });
   $("#newest_rating").empty().append(row)
 };
 
 function fetchTransactionId(allRatings){
-  var transaction = allRatings.slice(0,1).map(function(transactId){
-    return (
-      transactId.transact_id
-    )
-  });
-  transactUrl = transaction[0]
-  fetchNewestRating(transactUrl)
+  fetchNewestRating(allRatings[0].transact_id)
 }
 
 function renderMemberName(rating){
   var member = rating.slice(0, 1).map(function(transaction) {
-    return (
-      transaction.member_ids
-      )
+    return transaction.member_ids
   });
   memberPicture = member[0]
   fetchMemberToPage(memberPicture)
@@ -37275,32 +37278,32 @@ function renderCustomerName(customerName){
   $("#customer_name").append(customerName)
 };
 
-// function renderPreviousRatingTransactions(previousTransactionRatings){
-//   var row = previousTransactionRatings.map(function(transaction,index) {
-//     return (
-//       +"<div class='two wide column'><h3>" + transaction.person_id + "</h3></div>"
-//       +"<div class='one wide column'></div>"
-//       +"<div class='four wide column'><h3>" + transaction.created_at + "</h3></div>"
-//       +"<div class='six wide column'></div>"
-//       +"<div class='three wide column'>" + transaction.stars +"</div>"
-//       +"<div class='sixteen wide column'></div>"
-//     )}
-//   $("#previous_transaction").append(row[0])
-// };
+function renderPreviousRatingTransactions(previousTransactionRatings){
+  debugger;
+  var rows = previousTransactionRatings.slice(1, 2).map(function(transaction) {
+    return (
+      +"<tr>"
+       +"<td>"
+         +"<div class='content'>"
+         +"<h3>"+ transaction.person_id +"</h3>"
+         +"<div class='sub header'>Customer"
+         +"</div>"
+       +"</td>"
+       +"<td class='four wide'>"
+         +"<div class='content'>"
+         +"<h3>"+ transaction.created_at +"</h3>"
+         +"</div>"
+       +"</td>"
+       +"<td class='four wide'>"
+         +"<div class='content'>"
+         +"<h3>"+ transaction.stars +"</h3>"
+         +"</div>"
+       +"</td></tr>"
+    )
+  });
 
-// function renderPreviousRatingCustomerName(nameCollection){
-//   var name =  nameCollection.map(function(personName, index){
-//     return(
-//       "<h3 id='people"+index+"'>"+personName.name+"</h3>"
-//     )
-//     })
-//
-//     $("#people0").append(name[0])
-//     $("#people1").append(name[1])
-//     $("#people2").append(name[2])
-//     $("#people3").append(name[3])
-//     $("#people4").append(name[4])
-// };
+  $("#previous_transaction").empty().append(rows)
+};
 function fetchPersonId(rating){
   var personIdArray = rating.map(function(personIds){
     return(
@@ -37328,7 +37331,6 @@ var name =  nameCollection.map(function(personName, index){
 
 }
 ;
-
 function slider() {
   $('.slider').slick({
     slidesToShow: 1,
@@ -37338,6 +37340,8 @@ function slider() {
     arrows: false
   })
 };
+setInterval(fetchLeaderboard, 300000);
+
 function fetchLeaderboard() {
   $.ajax({
     type: "GET",
@@ -37352,6 +37356,8 @@ function fetchLeaderboard() {
     }
   })
 };
+
+setInterval(fetchMostRecentRatings, 300000);
 
 function fetchMostRecentRatings() {
   $.ajax({
@@ -37370,45 +37376,76 @@ function fetchMostRecentRatings() {
   })
 };
 
-function fetchNewestRating(transactUrl) {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/transacts/"+ transactUrl +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(ratings) {
-      $.each(ratings, function(index, rating) {
-        renderNewestRating(rating)
-        renderMemberName(rating)
-        fetchTransactionCode(rating)
-        fetchCustomerName(rating)
-        fetchPreviousRatingsForTransactionId(rating)
+setInterval(fetchNewestRating, 300000);
+
+function fetchNewestRating(transaction) {
+  if(transaction){
+
+    $.ajax({
+      type: "GET",
+      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+      success: function(ratings) {
+        $.each(ratings, function(index, rating) {
+          renderNewestRating(rating)
+          renderMemberName(rating)
+          fetchTransactionCode(rating)
+          fetchCustomerName(rating)
+          fetchPreviousRatingsForTransactionId(rating)
+        }
+      )},
+      error: function(xhr) {
+        console.log(xhr.responseText)
       }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
+    });
+  }
 };
 
-var previousTransactionRatings = []
+
+
+
+
+
+
+// setInterval(fetchPreviousRatingsForTransactionId, 300000);
 
 function fetchPreviousRatingsForTransactionId(rating) {
   var transactId = rating.map(function(transaction){
     return (transaction.transact_id)
   })
+  fetchRatingDataForPreviousTransactions(transactId[0])
+};
+
+
+function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
     type: "GET",
-    // " + transactId + " add where 1911
-    url: "http://api.mytrelora.com/transacts/1911/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(ratings) {
-      $.each(ratings, function(index, previousRatings) {
-        var previousTransaction = previousRatings.id
-        previousTransactionRatings.push(previousTransaction)
-        // renderPreviousRatingTransactions(previousTransactionRatings)
-    }
-  )},
-  })
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    success: function(transact) {
+      a = Object.keys(transact.ratings).reduce(function(collector, key) {
+        collector.push(transact.ratings[key])
+        return collector;
+      }, [])
+      console.log(a);
 
+    }
+  })
 };
+
+// function fetchTransactionSpecificRatingData(rating) {
+//   debugger;
+//   var transact_data = rating.map(function(transaction){
+//     previousTransactionRatings.push(transaction)
+//   })
+//   debugger;
+//   console.log(previousTransactionRatings)
+// };
+
+
+
+
+
+
+// setInterval(fetchCustomerName, 300000);
 
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
@@ -37426,6 +37463,8 @@ function fetchCustomerName(rating) {
   })
 };
 
+// setInterval(fetchTransactionCode, 300000);
+
 function fetchTransactionCode(rating) {
   var transactId = rating.map(function(transactUrl){
     return (transactUrl.transact_id)
@@ -37442,6 +37481,8 @@ function fetchTransactionCode(rating) {
   })
 };
 
+// setInterval(fetchMemberToPage, 300000);
+
 function fetchMemberToPage(memberPicture){
 $.ajax({
   type: "GET",
@@ -37452,6 +37493,8 @@ $.ajax({
   }
   })
 };
+
+// setInterval(fetchMemberPhoto, 300000);
 
 function fetchMemberPhoto(collectionOfMemberIds){
   collectionOfMemberIds.map(function(member){
@@ -37467,12 +37510,10 @@ function fetchMemberPhoto(collectionOfMemberIds){
           }
         })
       )
+    })
+  };
 
-  });
-
-    console.log(memberCollection)
-    // setTimeout(function(){renderMembers(memberCollection)}, 1000);
-};
+// setInterval(fetchMostRecentTransactionFromRatings, 300000);
 
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
@@ -37488,6 +37529,8 @@ function fetchMostRecentTransactionFromRatings() {
     }
   })
 };
+
+// setInterval(fetchPeople, 300000);
 
 function fetchPeople(personIdArray){
 personIdArray.map(function(people){
@@ -37523,45 +37566,3 @@ personIdArray.map(function(people){
 
 
 
-
-$(document).ready(function(){
-  fetchLeaderboard()
-  fetchMostRecentRatings()
-  fetchMostRecentTransactionFromRatings()
-  fetchNewestRating()
-  slider()
-});
-
-// <script> LOAD CONTENT ON INTERVAL
-// function loadNowPlaying(){
-//   $("#now_playing").load("now_playing.php");
-// }
-// setInterval(function(){loadNowPlaying()}, 5000);
-// </script>
-
-
-// var key = <%= ENV['KEY'] %>
-// API endpoint serving ruby objects
-
-
-// call 1 --> result ====> call2(result)
-   // call 1 success: function(result) { functionToTriggerCall2(result) }
-
-// pass ruby objects to javascript
-
-// "<div>" +
-//   "<h1>" + member.name + "</h1>" +
-// "</div>"
-// $("#leaderboard").append(
-//   + "<h5>"
-//   + agent.members.map(function(member) {return member.name})
-//   + "</h5>"
-//   )
-// remove the existing content before
-// jQuery empty()
-// "    " replaceWith()
-// "    " text()
-
-
-// setTimeout()
-// setInterval()
