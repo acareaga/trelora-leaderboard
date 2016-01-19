@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'hurley'
 gem 'jquery-slick-rails'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'byebug'
