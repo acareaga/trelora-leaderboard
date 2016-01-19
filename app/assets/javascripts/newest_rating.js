@@ -22,24 +22,12 @@ function renderNewestRating(rating) {
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
-
-          +"<table class='ui very basic collapsing celled table'>"
+          +"<div class='sixteen wide column'>"
+          +"<div class='ui centered grid'>"
+          +"<table class='ui very basic celled table'>"
             +"<tbody id='previous_transaction'>"
             +"</tbody>"
-          +"</table>"
-
-          // +"<div class='six wide column' id='previous_transaction'"+ index +"></div>"
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
-          // +"<div class='sixteen wide column'></div>"
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
+          +"</table></div></div>"
       )
   });
   $("#newest_rating").empty().append(row)
@@ -72,24 +60,37 @@ function renderCustomerName(customerName){
   $("#customer_name").append(customerName)
 };
 
+function renderPreviousTransactionCustomerName(customerName) {
+  $("#previous_transaction_customer_name").append(customerName)
+};
+
+function formatDateTime(time) {
+  debugger;
+  now = Date.new()
+  time_ago = now - time
+};
+
 function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
   var rows = arrayOfPreviousTransactions.slice(1, 2).map(function(transaction) {
+    fetchPreviousTransactionCustomerName(transaction.person_id)
+    formatDateTime(transaction.created_at)
+    debugger;
     return (
-      +"<tr>"
-       +"<td class='six wide'>"
+        "<tr>"
+       +"<td class='six wide column'>"
          +"<div class='content'>"
-         +"<h3>"+ transaction.person_id +"</h3>"
+         +"<h3 id='previous_transaction_customer_name'></h3>"
          +"<div class='sub header'>Customer"
          +"</div>"
        +"</td>"
-       +"<td class='six wide'>"
+       +"<td class='six wide column'>"
          +"<div class='content'>"
          +"<h3>"+ transaction.created_at +"</h3>"
          +"</div>"
        +"</td>"
-       +"<td class='four wide'>"
+       +"<td class='four wide column'>"
          +"<div class='content'>"
-         +"<h3>"+ transaction.stars +"</h3>"
+         +"<h3>"+ transaction.stars +" Stars</h3>"
          +"</div>"
        +"</td></tr>"
     )

@@ -87,6 +87,19 @@ function fetchRatingDataForPreviousTransactions(transactId) {
   })
 };
 
+function fetchPreviousTransactionCustomerName(personId) {
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key=<%= ENV['api_key'] %>",
+    success: function(customer) {
+      $.each(customer, function(index, customerId) {
+        var customerName = customerId.name
+        renderPreviousTransactionCustomerName(customerName)
+    }
+  )},
+  })
+};
+
 
 
 
