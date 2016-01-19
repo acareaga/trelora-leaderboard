@@ -37922,8 +37922,13 @@ body {
   opacity: 0.8;
 }
 
-/* line 71, /Users/acareaga/Turing/mod3/ratinganimals/app/assets/stylesheets/application.css.scss */
+/* line 70, /Users/acareaga/Turing/mod3/ratinganimals/app/assets/stylesheets/application.css.scss */
 .background-overlay {
   background: rgba(46, 204, 113, 0.6);
   background-size: cover;
+}
+
+/* line 75, /Users/acareaga/Turing/mod3/ratinganimals/app/assets/stylesheets/application.css.scss */
+#standard-font {
+  font-family: 'Montserrat', sans-serif;
 }
