@@ -16,7 +16,7 @@ function renderMostRecentRatings(rating) {
         +"</td>"
         +"<td class='six wide'>"
           +"<div class='content'>"
-          +"<h3>"+ feedback.comments +"</h3>"
+          +"<h3>"+ feedback.comments.substring(0,250) +"</h3>"
           +"</div>"
           +"<td>"
           +"<div class='ui statistic'>"

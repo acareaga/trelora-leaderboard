@@ -1,13 +1,3 @@
-function fetchTransactionId(allRatings){
-  var transaction = allRatings.slice(0,1).map(function(transactId){
-    return (
-      transactId.transact_id
-    )
-  });
-  transactUrl = transaction[0]
-  fetchNewestRating(transactUrl)
-}
-
 function renderNewestRating(rating) {
   var row = rating.slice(0, 1).map(function(transaction) {
     // debugger;
@@ -50,10 +40,10 @@ function renderNewestRating(rating) {
         // +"</td></tr>"
 
           "<div class='ui grid'>"
-          +"<div class='one wide column'>_ICON_</div>"
-          +"<div class='four wide column'><h2>New Rating: " + transaction.stars.toFixed(0) + "!</h2></div>"
+          +"<div class='one wide column'><h1><i class='home icon'></i></h1></div>"
+          +"<div class='four wide column'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
           +"<div class='eight wide column'></div>"
-          +"<div class='three wide column'>_MEMBER PICS_</div>"
+          +"<div class='three wide column'><h4 class='ui image header' id='member_photo'></h4></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
           +"<div class='four wide column'><h2>"+ transaction.code +"</h2></div>"
@@ -66,7 +56,7 @@ function renderNewestRating(rating) {
           +"<div class='four wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='two wide column'></div>"
-          +"<div class='twelve wide column'><h1>"+ transaction.comments +"</h1></div>"
+          +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
@@ -83,18 +73,27 @@ function renderNewestRating(rating) {
           +"<div class='three wide column'>_STAR RATING_</div>"
       )
   });
-
   $("#newest_rating").empty().append(row)
 };
 
+function fetchTransactionId(allRatings){
+  var transaction = allRatings.slice(0,1).map(function(transactId){
+    return (
+      transactId.transact_id
+    )
+  });
+  transactUrl = transaction[0]
+  fetchNewestRating(transactUrl)
+}
+
 function renderMemberName(rating){
-var member = rating.slice(0, 1).map(function(transaction) {
-   return (
-     transaction.member_ids
-     )
- });
- memberPicture = member[0]
- fetchMemberToPage(memberPicture)
+  var member = rating.slice(0, 1).map(function(transaction) {
+    return (
+      transaction.member_ids
+      )
+  });
+  memberPicture = member[0]
+  fetchMemberToPage(memberPicture)
  };
 
 function renderPhotoToPage(photograph){
