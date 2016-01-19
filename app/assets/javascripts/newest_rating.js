@@ -46,11 +46,7 @@ function renderNewestRating(rating) {
 };
 
 function fetchTransactionId(allRatings){
-  var transaction = allRatings.slice(0,1).map(function(transactId){
-    return transactId.transact_id
-  });
-  transactUrl = transaction[0]
-  fetchNewestRating(transactUrl)
+  fetchNewestRating(allRatings[0].transact_id)
 }
 
 function renderMemberName(rating){
