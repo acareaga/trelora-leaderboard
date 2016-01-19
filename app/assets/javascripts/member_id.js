@@ -5,7 +5,6 @@ function fetchMemberId(rating){
     )
   });
   fetchMemberPhoto(collectionOfMemberIds)
-  console.log(collectionOfMemberIds[2])
 };
 
 var memberCollection = []
