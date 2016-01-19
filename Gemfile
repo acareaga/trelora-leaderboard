@@ -20,10 +20,15 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '2.4.1'
-  gem 'selenium-webdriver'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :test do
+  gem 'webmock'
+  gem 'vcr'
+  gem 'simplecov'
 end

@@ -21,7 +21,13 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara'
+require 'vcr'
+require 'simplecov'
+require 'webmock/rspec'
 
+WebMock.disable_net_connect!(allow_localhost: true)
+SimpleCov.start "rails"
+Capybara.javascript_driver = :selenium
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -98,4 +104,333 @@ RSpec.configure do |config|
 =end
 end
 
-Capybara.javascript_driver = :selenium
+# class ActiveSupport::TestCase
+#
+#   VCR.configure do |config|
+#     config.cassette_library_dir = "spec/cassettes"
+#     config.hook_into :webmock
+#   end
+#
+#   def stub_leaderboard
+#     {
+#       leaderboard: {
+#         members: [
+#           {
+#             id: 1,
+#             name: "Toby Reschke",
+#             atname: "toby",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/Toby_20FACE.jpg",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/small_Toby_20FACE.jpg"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/default_Toby_20FACE.jpg"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/medium_Toby_20FACE.jpg"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/large_Toby_20FACE.jpg"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/high_def_Toby_20FACE.jpg"
+#                 }
+#               }
+#             },
+#             ratings_average: 5
+#           },
+#           {
+#             id: 6,
+#             name: "Greg Hanson",
+#             atname: "greg",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/Greg.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/small_Greg.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/default_Greg.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/medium_Greg.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/large_Greg.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/6/high_def_Greg.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 5
+#           },
+#           {
+#             id: 5,
+#             name: "Kaitlin Bermel",
+#             atname: "kaitlin",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/Kaitlin-edited.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/small_Kaitlin-edited.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/default_Kaitlin-edited.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/medium_Kaitlin-edited.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/large_Kaitlin-edited.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/5/high_def_Kaitlin-edited.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 5
+#           },
+#           {
+#             id: 8,
+#             name: "Antonio Ayala",
+#             atname: "antonio",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/Anton_20_2_.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/small_Anton_20_2_.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/default_Anton_20_2_.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/medium_Anton_20_2_.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/large_Anton_20_2_.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/8/high_def_Anton_20_2_.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 4.933333333333334
+#           },
+#           {
+#             id: 2,
+#             name: "Christopher Stjernholm",
+#             atname: "christopher",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/Christopher.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/small_Christopher.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/default_Christopher.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/medium_Christopher.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/large_Christopher.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/2/high_def_Christopher.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 4.814814814814815
+#           },
+#           {
+#             id: 4,
+#             name: "Travis Barton",
+#             atname: "travis",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/download.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/small_download.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/default_download.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/medium_download.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/large_download.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/4/high_def_download.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 4.75
+#           },
+#           {
+#             id: 12,
+#             name: "Karen Jacobson",
+#             atname: "karen",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/Karen_20_1_.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/small_Karen_20_1_.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/default_Karen_20_1_.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/medium_Karen_20_1_.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/large_Karen_20_1_.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/12/high_def_Karen_20_1_.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 4.75
+#           },
+#           {
+#             id: 11,
+#             name: "Dave",
+#             atname: "dave",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/Color_20Headshot.jpg",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/small_Color_20Headshot.jpg"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/default_Color_20Headshot.jpg"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/medium_Color_20Headshot.jpg"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/large_Color_20Headshot.jpg"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/11/high_def_Color_20Headshot.jpg"
+#                 }
+#               }
+#             },
+#             ratings_average: 4.5
+#           },
+#           {
+#             id: 26,
+#             name: "Steven James",
+#             atname: "steven",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/Headshot.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/small_Headshot.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/default_Headshot.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/medium_Headshot.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/large_Headshot.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/26/high_def_Headshot.png"
+#                 }
+#               }
+#             },
+#             ratings_average: 4
+#           },
+#           {
+#             id: 52,
+#             name: "Joel White",
+#             atname: "joel",
+#             avatar: {
+#               avatar: {
+#                 url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png",
+#                 small: {
+#                   url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png"
+#                 },
+#                 default: {
+#                   url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png"
+#                 },
+#                 medium: {
+#                   url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png"
+#                 },
+#                 large: {
+#                   url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png"
+#                 },
+#                 high_def: {
+#                   url: "https://s3.amazonaws.com/trelorawebassets/v2/avatar-default.png"
+#                 }
+#               }
+#             },
+#             ratings_average: -1
+#           },
+#           {
+#             id: 21,
+#             name: "Eileen",
+#             atname: "eileen",
+#             avatar: {
+#               avatar: {
+#                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/eileen_bus_image_20_2_.png",
+#                 small: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/small_eileen_bus_image_20_2_.png"
+#                 },
+#                 default: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/default_eileen_bus_image_20_2_.png"
+#                 },
+#                 medium: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/medium_eileen_bus_image_20_2_.png"
+#                 },
+#                 large: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/large_eileen_bus_image_20_2_.png"
+#                 },
+#                 high_def: {
+#                   url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/21/high_def_eileen_bus_image_20_2_.png"
+#                 }
+#               }
+#             },
+#             ratings_average: -1
+#           }
+#         ]
+#       }
+#     }
+#   end
+# end
+
+# class ActionDispatch::IntegrationTest
+#   include Capybara::DSL
+#
+#   def stub_omniauth
+#     OmniAuth.config.test_mode = true
+#     OmniAuth.config.mock_auth[:instagram] = OmniAuth::AuthHash.new({
+#       "provider"=>"instagram",
+#       "uid"=>"2331596714",
+#       "info"=>{
+#         "nickname"=>"aaronturing",
+#         "name"=>"Aaron",
+#         "email"=>nil,
+#         "image"=>"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-19/s150x150/12338859_189639354716935_1184283222_a.jpg",
+#         "bio"=>"Turing test",
+#         "website"=>""},
+#       "credentials"=>{"token"=>"2331596714.2dd2c36.bd9e537a6ecc4b6ea85b0cc9f22a5779", "expires"=>false},
+#       "extra"=>{
+#         "raw_info"=>{
+#           "username"=>"aaronturing",
+#           "bio"=>"Turing test",
+#           "website"=>"",
+#           "profile_picture"=>"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-19/s150x150/12338859_189639354716935_1184283222_a.jpg",
+#           "full_name"=>"Aaron",
+#           "id"=>"2331596714"
+#           }}})
+#   end
+# end

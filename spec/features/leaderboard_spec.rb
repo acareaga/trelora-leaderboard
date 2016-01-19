@@ -1,9 +1,13 @@
+require "rails_helper"
 
+# RSpec.describe Leaderboard do
 
-feature 'User visits the root path' do
-  scenario 'they see the leaderboard slide on the page', js: true do
-    visit root_path
+  feature 'User visits the root path' do
+    scenario 'they see the leaderboard slide on the page', js: true do
+      visit root_path
 
-    expect(page).to have_css '#leaderboard', 'Leaderboard'
+      expect(page).to have_css '#leaderboard', 'Leaderboard'
+    end
   end
-end
+
+# end
