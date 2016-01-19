@@ -13,7 +13,6 @@ gem 'figaro'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'hurley'
 gem 'jquery-slick-rails'
-gem 'global'
 
 group :development, :test do
   gem 'byebug'

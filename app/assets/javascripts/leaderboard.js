@@ -1,3 +1,4 @@
+
 function renderLeaderboard(agent) {
 
   var rows = agent.members.slice(0, 5).map(function(member) {
@@ -29,19 +30,4 @@ function renderLeaderboard(agent) {
   });
 
   $("#leaderboard").empty().append(rows)
-};
-
-function fetchLeaderboard() {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(leaderboard) {
-      $.each(leaderboard, function(index, agent) {
-        renderLeaderboard(agent)
-      }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
 };

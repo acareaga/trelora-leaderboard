@@ -9,22 +9,7 @@ function fetchPersonId(rating){
 
 var nameCollection = []
 
-function fetchPeople(personIdArray){
-personIdArray.map(function(people){
-  return (
-    $.ajax({
-      type: "GET",
-      url: "http://api.mytrelora.com/people/"+ people +"?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-      success:function(people){
-      $.each(people, function (index,person) {
-        nameCollection.push(person)
-      })
-    }
-    })
-  )
-});
-setTimeout(function(){renderNames(nameCollection)}, 1000);
-}
+
 
 function renderNames(nameCollection){
 var name =  nameCollection.map(function(personName, index){

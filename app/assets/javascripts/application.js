@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require semantic-ui
-//= require global-js
 //= require jquery.slick
 //= require_tree .
 

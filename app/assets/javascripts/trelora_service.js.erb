@@ -1,0 +1,89 @@
+function fetchLeaderboard() {
+  $.ajax({
+    type: "GET",
+    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key=<%= ENV['api_key'] %>",
+    success: function(leaderboard) {
+      $.each(leaderboard, function(index, agent) {
+        renderLeaderboard(agent)
+      }
+    )},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  })
+};
+
+function fetchMostRecentRatings() {
+  $.ajax({
+    type: "GET",
+    url:  "http://api.mytrelora.com/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(ratings) {
+      $.each(ratings, function(index, rating) {
+        renderMostRecentRatings(rating)
+        fetchPersonId(rating)
+      }
+    )},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  })
+};
+
+function fetchNewestRating(transactUrl) {
+  $.ajax({
+    type: "GET",
+    url:  "http://api.mytrelora.com/transacts/"+ transactUrl +"/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(ratings) {
+      $.each(ratings, function(index, rating) {
+        renderNewestRating(rating)
+        renderMemberName(rating)
+      }
+    )},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  })
+};
+
+function fetchMemberToPage(memberPicture){
+$.ajax({
+  type: "GET",
+  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key=<%= ENV['api_key'] %>",
+  success:function(memberPhoto){
+   var photograph =  memberPhoto.member.avatar.avatar.url
+   renderPhotoToPage(photograph)
+  }
+  })
+}
+
+function fetchMostRecentTransactionFromRatings() {
+  $.ajax({
+    type: "GET",
+    url:  "http://api.mytrelora.com/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(data) {
+      $.each(data, function(index, allRatings) {
+        fetchTransactionId(allRatings)
+      }
+    )},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  })
+};
+
+function fetchPeople(personIdArray){
+personIdArray.map(function(people){
+  return (
+    $.ajax({
+      type: "GET",
+      url: "http://api.mytrelora.com/people/"+ people +"?api_key=<%= ENV['api_key'] %>",
+      success:function(people){
+      $.each(people, function (index,person) {
+        nameCollection.push(person)
+      })
+    }
+    })
+  )
+});
+setTimeout(function(){renderNames(nameCollection)}, 1000);
+}

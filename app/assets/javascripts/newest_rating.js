@@ -37,39 +37,6 @@ function renderNewestRating(rating) {
   $("#newest_rating").empty().append(rows)
 };
 
-
-function fetchMostRecentTransactionFromRatings() {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(data) {
-      $.each(data, function(index, allRatings) {
-        fetchTransactionId(allRatings)
-      }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
-};
-
-
-function fetchNewestRating(transactUrl) {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/transacts/"+ transactUrl +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(ratings) {
-      $.each(ratings, function(index, rating) {
-        renderNewestRating(rating)
-        renderMemberName(rating)
-      }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
-};
-
 function renderMemberName(rating){
 var member = rating.slice(0, 1).map(function(transaction) {
    return (
@@ -77,18 +44,7 @@ var member = rating.slice(0, 1).map(function(transaction) {
      )
  });
  memberPicture = member[0]
- renderMemberToPage(memberPicture)
- }
-
- function renderMemberToPage(memberPicture){
- $.ajax({
-   type: "GET",
-   url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-   success:function(memberPhoto){
-    var photograph =  memberPhoto.member.avatar.avatar.url
-    renderPhotoToPage(photograph)
-   }
-   })
+ fetchMemberToPage(memberPicture)
  }
 
 function renderPhotoToPage(photograph){

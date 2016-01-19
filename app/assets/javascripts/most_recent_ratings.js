@@ -38,19 +38,3 @@ function renderMostRecentRatings(rating) {
 
   $("#most_recent_ratings").empty().append(rows)
 };
-
-function fetchMostRecentRatings() {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-    success: function(ratings) {
-      $.each(ratings, function(index, rating) {
-        renderMostRecentRatings(rating)
-        fetchPersonId(rating)
-      }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
-};
