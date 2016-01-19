@@ -1,13 +1,11 @@
 function fetchMemberId(rating){
   var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
-    return(
-      memberIds.member_ids
-    )
+    return(memberIds.member_ids)
   });
   fetchMemberPhoto(collectionOfMemberIds)
-  console.log(collectionOfMemberIds[2])
 };
 
+// avoud globals
 var memberCollection = []
 
 // function renderMemberName(rating){

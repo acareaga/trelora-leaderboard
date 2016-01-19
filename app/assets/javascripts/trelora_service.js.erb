@@ -1,3 +1,5 @@
+setInterval(fetchLeaderboard, 300000);
+
 function fetchLeaderboard() {
   $.ajax({
     type: "GET",
@@ -12,6 +14,8 @@ function fetchLeaderboard() {
     }
   })
 };
+
+setInterval(fetchMostRecentRatings, 300000);
 
 function fetchMostRecentRatings() {
   $.ajax({
@@ -30,45 +34,76 @@ function fetchMostRecentRatings() {
   })
 };
 
-function fetchNewestRating(transactUrl) {
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/transacts/"+ transactUrl +"/ratings?api_key=<%= ENV['api_key'] %>",
-    success: function(ratings) {
-      $.each(ratings, function(index, rating) {
-        renderNewestRating(rating)
-        renderMemberName(rating)
-        fetchTransactionCode(rating)
-        fetchCustomerName(rating)
-        fetchPreviousRatingsForTransactionId(rating)
+setInterval(fetchNewestRating, 300000);
+
+function fetchNewestRating(transaction) {
+  if(transaction){
+
+    $.ajax({
+      type: "GET",
+      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=<%= ENV['api_key'] %>",
+      success: function(ratings) {
+        $.each(ratings, function(index, rating) {
+          renderNewestRating(rating)
+          renderMemberName(rating)
+          fetchTransactionCode(rating)
+          fetchCustomerName(rating)
+          fetchPreviousRatingsForTransactionId(rating)
+        }
+      )},
+      error: function(xhr) {
+        console.log(xhr.responseText)
       }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
+    });
+  }
 };
 
-var previousTransactionRatings = []
+
+
+
+
+
+
+// setInterval(fetchPreviousRatingsForTransactionId, 300000);
 
 function fetchPreviousRatingsForTransactionId(rating) {
   var transactId = rating.map(function(transaction){
     return (transaction.transact_id)
   })
+  fetchRatingDataForPreviousTransactions(transactId[0])
+};
+
+
+function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
     type: "GET",
-    // " + transactId + " add where 1911
-    url: "http://api.mytrelora.com/transacts/1911/ratings?api_key=<%= ENV['api_key'] %>",
-    success: function(ratings) {
-      $.each(ratings, function(index, previousRatings) {
-        var previousTransaction = previousRatings.id
-        previousTransactionRatings.push(previousTransaction)
-        // renderPreviousRatingTransactions(previousTransactionRatings)
-    }
-  )},
-  })
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(transact) {
+      a = Object.keys(transact.ratings).reduce(function(collector, key) {
+        collector.push(transact.ratings[key])
+        return collector;
+      }, [])
+      console.log(a);
 
+    }
+  })
 };
+
+// function fetchTransactionSpecificRatingData(rating) {
+//   debugger;
+//   var transact_data = rating.map(function(transaction){
+//     previousTransactionRatings.push(transaction)
+//   })
+//   debugger;
+//   console.log(previousTransactionRatings)
+// };
+
+
+
+
+
+
+// setInterval(fetchCustomerName, 300000);
 
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
@@ -86,6 +121,8 @@ function fetchCustomerName(rating) {
   })
 };
 
+// setInterval(fetchTransactionCode, 300000);
+
 function fetchTransactionCode(rating) {
   var transactId = rating.map(function(transactUrl){
     return (transactUrl.transact_id)
@@ -102,6 +139,8 @@ function fetchTransactionCode(rating) {
   })
 };
 
+// setInterval(fetchMemberToPage, 300000);
+
 function fetchMemberToPage(memberPicture){
 $.ajax({
   type: "GET",
@@ -112,6 +151,8 @@ $.ajax({
   }
   })
 };
+
+// setInterval(fetchMemberPhoto, 300000);
 
 function fetchMemberPhoto(collectionOfMemberIds){
   collectionOfMemberIds.map(function(member){
@@ -127,12 +168,10 @@ function fetchMemberPhoto(collectionOfMemberIds){
           }
         })
       )
+    })
+  };
 
-  });
-
-    console.log(memberCollection)
-    // setTimeout(function(){renderMembers(memberCollection)}, 1000);
-};
+// setInterval(fetchMostRecentTransactionFromRatings, 300000);
 
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
@@ -148,6 +187,8 @@ function fetchMostRecentTransactionFromRatings() {
     }
   })
 };
+
+// setInterval(fetchPeople, 300000);
 
 function fetchPeople(personIdArray){
 personIdArray.map(function(people){
