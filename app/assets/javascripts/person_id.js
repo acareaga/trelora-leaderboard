@@ -9,8 +9,6 @@ function fetchPersonId(rating){
 
 var nameCollection = []
 
-
-
 function renderNames(nameCollection){
 var name =  nameCollection.map(function(personName, index){
   return(

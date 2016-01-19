@@ -45,7 +45,7 @@ var member = rating.slice(0, 1).map(function(transaction) {
  });
  memberPicture = member[0]
  fetchMemberToPage(memberPicture)
- }
+ };
 
 function renderPhotoToPage(photograph){
   var pic = photograph
@@ -54,4 +54,4 @@ function renderPhotoToPage(photograph){
   "<img src='"+ photograph +" 'class='ui tiny circular image'>"
 
   $("#member_photo").append(memberCirclePhoto)
-}
+};
