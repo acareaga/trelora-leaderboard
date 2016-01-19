@@ -40,12 +40,34 @@ function fetchNewestRating(transactUrl) {
         renderMemberName(rating)
         fetchTransactionCode(rating)
         fetchCustomerName(rating)
+        fetchPreviousRatingsForTransactionId(rating)
       }
     )},
     error: function(xhr) {
       console.log(xhr.responseText)
     }
   })
+};
+
+var previousTransactionRatings = []
+
+function fetchPreviousRatingsForTransactionId(rating) {
+  var transactId = rating.map(function(transaction){
+    return (transaction.transact_id)
+  })
+  $.ajax({
+    type: "GET",
+    // " + transactId + " add where 1911
+    url: "http://api.mytrelora.com/transacts/1911/ratings?api_key=<%= ENV['api_key'] %>",
+    success: function(ratings) {
+      $.each(ratings, function(index, previousRatings) {
+        var previousTransaction = previousRatings.id
+        previousTransactionRatings.push(previousTransaction)
+        renderPreviousRatingTransactions(previousTransactionRatings)
+    }
+  )},
+  })
+
 };
 
 function fetchCustomerName(rating) {
@@ -107,6 +129,7 @@ function fetchMemberPhoto(collectionOfMemberIds){
       )
 
   });
+
     console.log(memberCollection)
     // setTimeout(function(){renderMembers(memberCollection)}, 1000);
 };
