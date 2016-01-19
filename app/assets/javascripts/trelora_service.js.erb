@@ -37,27 +37,29 @@ function fetchMostRecentRatings() {
 setInterval(fetchNewestRating, 300000);
 
 function fetchNewestRating(transaction) {
-  console.log(transaction)
-if(transaction){
+  if(transaction){
 
-  $.ajax({
-    type: "GET",
-    url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=<%= ENV['api_key'] %>",
-    success: function(ratings) {
-      $.each(ratings, function(index, rating) {
-        renderNewestRating(rating)
-        renderMemberName(rating)
-        fetchTransactionCode(rating)
-        fetchCustomerName(rating)
-        fetchTransactionIdForPreviousRatings(rating)
+    $.ajax({
+      type: "GET",
+      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=<%= ENV['api_key'] %>",
+      success: function(ratings) {
+        $.each(ratings, function(index, rating) {
+          renderNewestRating(rating)
+          renderMemberName(rating)
+          fetchTransactionCode(rating)
+          fetchCustomerName(rating)
+          fetchPreviousRatingsForTransactionId(rating)
+        }
+      )},
+      error: function(xhr) {
+        console.log(xhr.responseText)
       }
-    )},
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  });
-}
+    });
+  }
 };
+
+
+
 
 
 
@@ -82,21 +84,19 @@ function fetchRatingDataForPreviousTransactions(transactId) {
         return collector;
       }, [])
       console.log(a);
-      // $.each(rating, function (index, rating) {
-      //   ratingCollection.push(rating)
-      // })
+
     }
   })
 };
 
-function fetchTransactionSpecificRatingData(rating) {
-  debugger;
-  var transact_data = rating.map(function(transaction){
-    previousTransactionRatings.push(transaction)
-  })
-  debugger;
-  console.log(previousTransactionRatings)
-};
+// function fetchTransactionSpecificRatingData(rating) {
+//   debugger;
+//   var transact_data = rating.map(function(transaction){
+//     previousTransactionRatings.push(transaction)
+//   })
+//   debugger;
+//   console.log(previousTransactionRatings)
+// };
 
 
 
@@ -168,8 +168,8 @@ function fetchMemberPhoto(collectionOfMemberIds){
           }
         })
       )
-
-  });
+    })
+  };
 
 // setInterval(fetchMostRecentTransactionFromRatings, 300000);
 
