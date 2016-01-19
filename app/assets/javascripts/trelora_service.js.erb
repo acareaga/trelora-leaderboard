@@ -38,11 +38,45 @@ function fetchNewestRating(transactUrl) {
       $.each(ratings, function(index, rating) {
         renderNewestRating(rating)
         renderMemberName(rating)
+        fetchTransactionCode(rating)
+        fetchCustomerName(rating)
       }
     )},
     error: function(xhr) {
       console.log(xhr.responseText)
     }
+  })
+};
+
+function fetchCustomerName(rating) {
+  var personId = rating.map(function(customerUrl){
+    return (customerUrl.person_id)
+  })
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key=<%= ENV['api_key'] %>",
+    success: function(customer) {
+      $.each(customer, function(index, customerId) {
+        var customerName = customerId.name
+        renderCustomerName(customerName)
+    }
+  )},
+  })
+};
+
+function fetchTransactionCode(rating) {
+  var transactId = rating.map(function(transactUrl){
+    return (transactUrl.transact_id)
+  })
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/transacts/" + transactId + "?api_key=<%= ENV['api_key'] %>",
+    success: function(transaction) {
+      $.each(transaction, function(index, transaction_id) {
+        var code = transaction_id.code
+        renderTransactionCode(code)
+    }
+  )},
   })
 };
 

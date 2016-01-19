@@ -51,9 +51,9 @@ function renderNewestRating(rating) {
           +"<div class='four wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h3>_CUSTOMER NAME_</h3></div>"
-          +"<div class='four wide column'><h3>_TRANSACTION CODE_</h3></div>"
-          +"<div class='four wide column'></div>"
+          +"<div class='four wide column'><h3 id='customer_name'></h3></div>"
+          +"<div class='six wide column'><h3 id='transaction_code'></h3></div>"
+          +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='two wide column'></div>"
           +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
@@ -103,4 +103,12 @@ function renderPhotoToPage(photograph){
   "<img src='"+ photograph +" 'class='ui tiny circular image'>"
 
   $("#member_photo").append(memberCirclePhoto)
+};
+
+function renderTransactionCode(code){
+  $("#transaction_code").append(code)
+};
+
+function renderCustomerName(customerName){
+  $("#customer_name").append(customerName)
 };
