@@ -29,12 +29,27 @@ function renderMostRecentRatings(rating) {
           +"</div>"
           +"</td>"
           +"<td class='four wide'>"
-            +"<div class='content'>"
-            +"<h3>"+ feedback.member_ids +"</h3>"
-            +"</div><br><br>"
+            +"<h4 class='ui image header' id='most_recent_member_photos"+index+"'>"
+            +"</h4><br><br>"
         +"</td><br><br></tr>"
       )
   });
 
   $("#most_recent_ratings").empty().append(rows)
+};
+
+function renderMemberPhotos(memberCollection) {
+  var rows = memberCollection.map(function(member) {
+    return (
+      "<h4 class='ui image header'>"
+        +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
+      +"</h4>"
+    )
+  });
+  $("#most_recent_member_photos0").empty().append(rows[0])
+  $("#most_recent_member_photos1").empty().append(rows[1])
+  $("#most_recent_member_photos2").empty().append(rows[2])
+  $("#most_recent_member_photos3").empty().append(rows[3])
+  $("#most_recent_member_photos4").empty().append(rows[4])
+
 };

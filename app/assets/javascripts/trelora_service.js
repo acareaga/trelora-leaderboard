@@ -140,22 +140,28 @@ $.ajax({
   })
 };
 
+
+// REFACTOR SET TIMEOUT HERE
+
+var memberCollection = []
+
 function fetchMemberPhoto(collectionOfMemberIds){
   collectionOfMemberIds.map(function(member){
+    return (
+      $.ajax({
+        type: "GET",
+        url: "http://api.mytrelora.com/members/"+ member +"?api_key="+ treloraApiKey(),
+        success:function(member){
+          $.each(member, function (index, member) {
+            memberCollection.push(member)
+          })
+        }
+      })
+    )
+  })
+  setTimeout(function(){renderMemberPhotos(memberCollection)}, 1000);
+};
 
-      return (
-        $.ajax({
-          type: "GET",
-          url: "http://api.mytrelora.com/members/"+ member +"?api_key="+ treloraApiKey(),
-          success:function(member){
-            $.each(member, function (index, member) {
-              memberCollection.push(member)
-            })
-          }
-        })
-      )
-    })
-  };
 
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
@@ -207,8 +213,6 @@ function fetchPeople(personIdArray){
   });
   setTimeout(function(){renderNames(nameCollection)}, 1000);
 };
-
-
 
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({

@@ -6,7 +6,6 @@ function fetchMemberId(rating){
 };
 
 // avoid globals
-var memberCollection = []
 
 // function renderMemberName(rating){
 //   var member = rating.slice(0, 1).map(function(transaction) {
