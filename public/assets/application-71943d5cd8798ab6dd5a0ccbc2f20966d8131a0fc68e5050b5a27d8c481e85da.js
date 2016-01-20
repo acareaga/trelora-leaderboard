@@ -37128,46 +37128,16 @@ function renderLeaderboard(agent) {
   $("#leaderboard").empty().append(rows)
 };
 $(document).ready(function(){
-  fetchLeaderboard()
-  fetchMostRecentRatings()
-  fetchMostRecentTransactionFromRatings()
-  fetchNewestRating()
+  renderSlides()
+  setInterval(renderSlides, 300000)
   slider()
 });
-function fetchMemberId(rating){
-  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
-    return(memberIds.member_ids)
-  });
-  fetchMemberPhoto(collectionOfMemberIds)
-};
-
-// avoud globals
-var memberCollection = []
-
-// function renderMemberName(rating){
-//   var member = rating.slice(0, 1).map(function(transaction) {
-//      return (
-//        transaction.member_ids
-//        )
-//    });
-//    memberPicture = member[0]
-//    fetchMemberToPage(memberPicture)
-//  };
-//
-// function renderPhotoToPage(photograph){
-//   var pic = photograph
-//   var memberCirclePhoto =
-//
-//   "<img src='"+ photograph +" 'class='ui tiny circular image'>"
-//
-//   $("#member_photo").append(memberCirclePhoto)
-// };
 function renderMostRecentRatings(rating) {
   var starDifference = rating.slice(0, 5).map(function(feedback){return feedback.star_diff = 5 - feedback.stars})
   var rows = rating.slice(0, 5).map(function(feedback,index) {
     return (
          "<tr>"
-        +"<td>"
+        +"<td class='four wide column'>"
           +"<div class='content'>"
           +"<h3 id='people"+index+"'></h3>"
           +"<div class='sub header'>Customer"
@@ -37193,15 +37163,74 @@ function renderMostRecentRatings(rating) {
           +"</div>"
           +"</td>"
           +"<td class='four wide'>"
-            +"<div class='content'>"
-            +"<h3>"+ feedback.member_ids +"</h3>"
-            +"</div><br><br>"
+            +"<h4 class='ui image header' id='most_recent_member_photos"+index+"'>"
+            +"</h4><br><br>"
         +"</td><br><br></tr>"
       )
   });
 
   $("#most_recent_ratings").empty().append(rows)
 };
+
+function renderMemberPhotos(memberCollection) {
+  var rows = memberCollection.map(function(member) {
+    return (
+      "<h4 class='ui image header'>"
+        +"<img src='"+ member +" 'class='ui tiny circular image'>"
+      +"</h4>"
+    )
+  });
+  $("#most_recent_member_photos0").empty().append(rows[0])
+  $("#most_recent_member_photos1").empty().append(rows[1])
+  $("#most_recent_member_photos2").empty().append(rows[2])
+  $("#most_recent_member_photos3").empty().append(rows[3])
+  $("#most_recent_member_photos4").empty().append(rows[4])
+
+};
+function fetchMember(collectionOfMemberIds){
+  var memberCollection = []
+  collectionOfMemberIds.slice(0,5).map(function(member){
+    memberCollection.push(fetchMemberPhoto(member))
+  });
+  renderMemberPhotos(memberCollection);
+};
+
+function fetchPeople(personIdArray){
+  var nameCollection = []
+  personIdArray.slice(0, 5).map(function(people){
+    nameCollection.push(fetchCustomerNames(people))
+  });
+  renderNames(nameCollection);
+};
+function fetchMemberId(rating){
+  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
+    return(memberIds.member_ids)
+  });
+  fetchMemberPhoto(collectionOfMemberIds)
+};
+
+function fetchPersonId(rating){
+  var personIdArray = rating.map(function(personIds){
+    return(
+      personIds.person_id
+    )
+  });
+  fetchPeople(personIdArray)
+}
+
+function renderNames(nameCollection){
+  var name =  nameCollection.map(function(personName, index){
+    return(
+      "<h3 id='people"+index+"'>"+personName+"</h3>"
+    )
+  })
+  $("#people0").append(name[0])
+  $("#people1").append(name[1])
+  $("#people2").append(name[2])
+  $("#people3").append(name[3])
+  $("#people4").append(name[4])
+}
+;
 function renderNewestRating(rating) {
   var row = rating.slice(0, 1).map(function(transaction,index) {
     return (
@@ -37226,24 +37255,12 @@ function renderNewestRating(rating) {
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
-
-          +"<table class='ui very basic collapsing celled table'>"
+          +"<div class='sixteen wide column'>"
+          +"<div class='ui centered grid'>"
+          +"<table class='ui very basic celled table'>"
             +"<tbody id='previous_transaction'>"
             +"</tbody>"
-          +"</table>"
-
-          // +"<div class='six wide column' id='previous_transaction'"+ index +"></div>"
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
-          // +"<div class='sixteen wide column'></div>"
-          // +"<div class='two wide column'><h3>_PERSON_</h3></div>"
-          // +"<div class='one wide column'></div>"
-          // +"<div class='four wide column'><h3>_TIME SINCE MOST RECENT_</h3></div>"
-          // +"<div class='six wide column'></div>"
-          // +"<div class='three wide column'>_STAR RATING_</div>"
+          +"</table></div></div>"
       )
   });
   $("#newest_rating").empty().append(row)
@@ -37263,9 +37280,7 @@ function renderMemberName(rating){
 
 function renderPhotoToPage(photograph){
   var pic = photograph
-  var memberCirclePhoto =
-
-  "<img src='"+ photograph +" 'class='ui tiny circular image'>"
+  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui tiny circular image'>"
 
   $("#member_photo").append(memberCirclePhoto)
 };
@@ -37278,25 +37293,29 @@ function renderCustomerName(customerName){
   $("#customer_name").append(customerName)
 };
 
-function renderPreviousRatingTransactions(previousTransactionRatings){
-  debugger;
-  var rows = previousTransactionRatings.slice(1, 2).map(function(transaction) {
+function renderPreviousTransactionCustomerName(customerName) {
+  $("#previous_transaction_customer_name").append(customerName)
+};
+
+function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
+  var rows = arrayOfPreviousTransactions.slice(1, 2).map(function(transaction) {
+    fetchPreviousTransactionCustomerName(transaction.person_id)
     return (
-      +"<tr>"
-       +"<td>"
+        "<tr>"
+       +"<td class='six wide column'>"
          +"<div class='content'>"
-         +"<h3>"+ transaction.person_id +"</h3>"
+         +"<h3 id='previous_transaction_customer_name'></h3>"
          +"<div class='sub header'>Customer"
          +"</div>"
        +"</td>"
-       +"<td class='four wide'>"
+       +"<td class='six wide column'>"
          +"<div class='content'>"
          +"<h3>"+ transaction.created_at +"</h3>"
          +"</div>"
        +"</td>"
-       +"<td class='four wide'>"
+       +"<td class='four wide column'>"
          +"<div class='content'>"
-         +"<h3>"+ transaction.stars +"</h3>"
+         +"<h3>"+ transaction.stars +" Stars</h3>"
          +"</div>"
        +"</td></tr>"
     )
@@ -37304,48 +37323,25 @@ function renderPreviousRatingTransactions(previousTransactionRatings){
 
   $("#previous_transaction").empty().append(rows)
 };
-function fetchPersonId(rating){
-  var personIdArray = rating.map(function(personIds){
-    return(
-      personIds.person_id
-    )
-  });
-  fetchPeople(personIdArray)
-}
 
-var nameCollection = []
-
-function renderNames(nameCollection){
-var name =  nameCollection.map(function(personName, index){
-  return(
-    "<h3 id='people"+index+"'>"+personName.name+"</h3>"
-  )
+function fetchPreviousRatingsForTransactionId(rating) {
+  var transactId = rating.map(function(transaction){
+    return (transaction.transact_id)
   })
-
-  $("#people0").append(name[0])
-  $("#people1").append(name[1])
-  $("#people2").append(name[2])
-  $("#people3").append(name[3])
-  $("#people4").append(name[4])
-
-
-}
-;
-function slider() {
-  $('.slider').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1 ,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: false
-  })
+  fetchRatingDataForPreviousTransactions(transactId[0])
 };
-setInterval(fetchLeaderboard, 300000);
+function treloraApiKey(){
+  return "dHVyaW5nOnR1cmluZw%3D%3D"
+};
+
+
+
+
 
 function fetchLeaderboard() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key="+ treloraApiKey(),
     success: function(leaderboard) {
       $.each(leaderboard, function(index, agent) {
         renderLeaderboard(agent)
@@ -37357,17 +37353,15 @@ function fetchLeaderboard() {
   })
 };
 
-setInterval(fetchMostRecentRatings, 300000);
-
 function fetchMostRecentRatings() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url:  "http://api.mytrelora.com/ratings?api_key="+ treloraApiKey(),
     success: function(ratings) {
       $.each(ratings, function(index, rating) {
         renderMostRecentRatings(rating)
         fetchPersonId(rating)
-        fetchMemberId(rating)
+        fetchMember(rating)
       }
     )},
     error: function(xhr) {
@@ -37376,14 +37370,12 @@ function fetchMostRecentRatings() {
   })
 };
 
-setInterval(fetchNewestRating, 300000);
-
 function fetchNewestRating(transaction) {
   if(transaction){
 
     $.ajax({
       type: "GET",
-      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key="+ treloraApiKey(),
       success: function(ratings) {
         $.each(ratings, function(index, rating) {
           renderNewestRating(rating)
@@ -37400,52 +37392,32 @@ function fetchNewestRating(transaction) {
   }
 };
 
-
-
-
-
-
-
-// setInterval(fetchPreviousRatingsForTransactionId, 300000);
-
-function fetchPreviousRatingsForTransactionId(rating) {
-  var transactId = rating.map(function(transaction){
-    return (transaction.transact_id)
-  })
-  fetchRatingDataForPreviousTransactions(transactId[0])
-};
-
-
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key="+ treloraApiKey(),
     success: function(transact) {
-      a = Object.keys(transact.ratings).reduce(function(collector, key) {
+      arrayOfPreviousTransactions = Object.keys(transact.ratings).reduce(function(collector, key) {
         collector.push(transact.ratings[key])
         return collector;
       }, [])
-      console.log(a);
-
+      renderPreviousRatingTransactions(arrayOfPreviousTransactions)
     }
   })
 };
 
-// function fetchTransactionSpecificRatingData(rating) {
-//   debugger;
-//   var transact_data = rating.map(function(transaction){
-//     previousTransactionRatings.push(transaction)
-//   })
-//   debugger;
-//   console.log(previousTransactionRatings)
-// };
-
-
-
-
-
-
-// setInterval(fetchCustomerName, 300000);
+function fetchPreviousTransactionCustomerName(personId) {
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key="+ treloraApiKey(),
+    success: function(customer) {
+      $.each(customer, function(index, customerId) {
+        var customerName = customerId.name
+        renderPreviousTransactionCustomerName(customerName)
+    }
+  )},
+  })
+};
 
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
@@ -37453,7 +37425,7 @@ function fetchCustomerName(rating) {
   })
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/people/" + personId + "?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key="+ treloraApiKey(),
     success: function(customer) {
       $.each(customer, function(index, customerId) {
         var customerName = customerId.name
@@ -37463,15 +37435,13 @@ function fetchCustomerName(rating) {
   })
 };
 
-// setInterval(fetchTransactionCode, 300000);
-
 function fetchTransactionCode(rating) {
   var transactId = rating.map(function(transactUrl){
     return (transactUrl.transact_id)
   })
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/transacts/" + transactId + "?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url: "http://api.mytrelora.com/transacts/" + transactId + "?api_key="+ treloraApiKey(),
     success: function(transaction) {
       $.each(transaction, function(index, transaction_id) {
         var code = transaction_id.code
@@ -37481,12 +37451,10 @@ function fetchTransactionCode(rating) {
   })
 };
 
-// setInterval(fetchMemberToPage, 300000);
-
 function fetchMemberToPage(memberPicture){
 $.ajax({
   type: "GET",
-  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
   success:function(memberPhoto){
    var photograph =  memberPhoto.member.avatar.avatar.url
    renderPhotoToPage(photograph)
@@ -37494,31 +37462,10 @@ $.ajax({
   })
 };
 
-// setInterval(fetchMemberPhoto, 300000);
-
-function fetchMemberPhoto(collectionOfMemberIds){
-  collectionOfMemberIds.map(function(member){
-
-      return (
-        $.ajax({
-          type: "GET",
-          url: "http://api.mytrelora.com/members/"+ member +"?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-          success:function(member){
-            $.each(member, function (index, member) {
-              memberCollection.push(member)
-            })
-          }
-        })
-      )
-    })
-  };
-
-// setInterval(fetchMostRecentTransactionFromRatings, 300000);
-
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
+    url:  "http://api.mytrelora.com/ratings?api_key="+ treloraApiKey(),
     success: function(data) {
       $.each(data, function(index, allRatings) {
         fetchTransactionId(allRatings)
@@ -37530,23 +37477,65 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
-// setInterval(fetchPeople, 300000);
-
-function fetchPeople(personIdArray){
-personIdArray.map(function(people){
-  return (
+function fetchMemberPhoto(member){
+  if (member) {
     $.ajax({
+      async: false,
       type: "GET",
-      url: "http://api.mytrelora.com/people/"+ people +"?api_key=dHVyaW5nOnR1cmluZw%3D%3D",
-      success:function(people){
-      $.each(people, function (index,person) {
-        nameCollection.push(person)
-      })
-    }
+      url: "http://api.mytrelora.com/members/"+ member.member_ids[0] +"?api_key="+ treloraApiKey(),
+      success:function(member){
+        var agent = member.member.avatar.avatar.url
+        succeed = agent
+      }
     })
-  )
-});
-  setTimeout(function(){renderNames(nameCollection)}, 1000);
+    return succeed
+  }
+};
+
+function fetchCustomerNames(people) {
+  if (people) {
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
+      success:function(people){
+        var customer = people.person.name
+        succeed = customer
+       }
+    })
+    return succeed
+  }
+};
+
+function fetchRatingDataForPreviousTransactions(transactId) {
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key="+ treloraApiKey(),
+    success: function(transact) {
+      arrayOfPreviousTransactions = Object.keys(transact.ratings).reduce(function(collector, key) {
+        collector.push(transact.ratings[key])
+        return collector;
+      }, [])
+      renderPreviousRatingTransactions(arrayOfPreviousTransactions)
+    }
+  })
+};
+
+function renderSlides() {
+  fetchLeaderboard()
+  fetchMostRecentRatings()
+  fetchMostRecentTransactionFromRatings()
+  fetchNewestRating()
+}
+;
+function slider() {
+  $('.slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1 ,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false
+  })
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
