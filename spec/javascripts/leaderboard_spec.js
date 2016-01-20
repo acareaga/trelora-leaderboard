@@ -25,8 +25,7 @@ describe("leaderboard", function() {
             avatar: {
               avatar: {
                 url: "https://mytrelora-production.s3.amazonaws.com/members/avatar/1/Toby_20FACE.jpg"                    }
-              }
-            },
+              },
             ratings_average: 5
           },
           {
@@ -55,6 +54,8 @@ describe("leaderboard", function() {
     ]
 
     var actualAgents = $('#leaderboard tr');
+
+    console.log(actualAgents)
 
     expect(actualAgents).toEqual(expectedAgents);
 

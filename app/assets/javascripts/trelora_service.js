@@ -152,7 +152,7 @@ function fetchMemberPhoto(collectionOfMemberIds){
         type: "GET",
         url: "http://api.mytrelora.com/members/"+ member +"?api_key="+ treloraApiKey(),
         success:function(member){
-          $.each(member, function (index, member) {
+          $.each(member, function (index, member, ar) {
             memberCollection.push(member)
           })
         }
@@ -178,41 +178,41 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
-// function fetchPeople(personIdArray){
-//   personIdArray.slice(0, 5).map(function(people){
-//     return (
-//       $.ajax({
-//         type: "GET",
-//         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
-//         success:function(people){
-//         arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
-//           collector.push(people.person.name)
-//           return collector;
-//         }, [])
-//         console.log(arrayOfCustomers)
-//         renderNames(arrayOfCustomers)
-//       }
-//       })
-//     )
-//   });
-// };
-
 function fetchPeople(personIdArray){
-  personIdArray.map(function(people){
+  personIdArray.slice(0, 5).map(function(people){
     return (
       $.ajax({
         type: "GET",
         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
         success:function(people){
-        $.each(people, function (index,person) {
-          nameCollection.push(person)
-        })
+        arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
+          collector.push(people.person.name[key].join(""))
+          return collector;
+        }, [])
+        console.log(arrayOfCustomers)
+        renderNames(arrayOfCustomers)
       }
       })
     )
   });
-  setTimeout(function(){renderNames(nameCollection)}, 1000);
 };
+
+// function fetchPeople(personIdArray){
+//   personIdArray.map(function(people){
+//     return (
+//       $.ajax({
+//         type: "GET",
+//         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
+//         success:function(people){
+//         $.each(people, function (index,person) {
+//           nameCollection.push(person)
+//         })
+//       }
+//       })
+//     )
+//   });
+//   setTimeout(function(){renderNames(nameCollection)}, 1000);
+// };
 
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
@@ -227,3 +227,15 @@ function fetchRatingDataForPreviousTransactions(transactId) {
     }
   })
 };
+
+// memberCollection is initally in the right order
+// memberCollection is then sorted in reverse oreder but not numerically
+// THEN it it sorted by member ID lowest to highest or highest to lowest
+// WHEN it gets appeneded it comes out - 2 2 4 6 8 12 * just an example
+// Prior to the jQuery appending event, the array gets sorted
+// Convert to Object instead?
+
+// { members: [array we need first],
+//             [array we need second]}
+//
+// Object.getBy

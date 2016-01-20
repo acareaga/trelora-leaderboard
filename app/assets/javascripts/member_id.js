@@ -3,6 +3,7 @@ function fetchMemberId(rating){
     return(memberIds.member_ids)
   });
   fetchMemberPhoto(collectionOfMemberIds)
+  // ARRAY IS GOOD BEFORE THIS
 };
 
 // avoid globals

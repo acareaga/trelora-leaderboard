@@ -3,7 +3,7 @@ function renderMostRecentRatings(rating) {
   var rows = rating.slice(0, 5).map(function(feedback,index) {
     return (
          "<tr>"
-        +"<td>"
+        +"<td class='four wide column'>"
           +"<div class='content'>"
           +"<h3 id='people"+index+"'></h3>"
           +"<div class='sub header'>Customer"
