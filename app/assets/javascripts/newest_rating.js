@@ -12,7 +12,7 @@ function renderNewestRating(rating) {
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h2>"+ transaction.code +"</h2></div>"
+          +"<div class='four wide column'><h2>"+ transaction.code.replace(/_/g, ' ') +"</h2></div>"
           +"<div class='four wide column'><h2>- " + transaction.stars.toFixed(0) + " Stars!</h2></div>"
           +"<div class='four wide column'></div>"
           +"<div class='sixteen wide column'></div>"

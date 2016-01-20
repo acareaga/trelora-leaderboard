@@ -11,7 +11,7 @@ function renderMostRecentRatings(rating) {
         +"</td>"
         +"<td class='four wide'>"
           +"<div class='content'>"
-          +"<h3>"+ feedback.code +"</h3>"
+          +"<h3>"+ feedback.code.replace(/_/g, ' ') +"</h3>"
           +"</div>"
         +"</td>"
         +"<td class='six wide'>"
