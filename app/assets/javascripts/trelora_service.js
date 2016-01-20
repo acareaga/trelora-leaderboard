@@ -177,19 +177,19 @@ function fetchMostRecentTransactionFromRatings() {
 };
 
 function fetchPeople(personIdArray){
-personIdArray.map(function(people){
-  return (
-    $.ajax({
-      type: "GET",
-      url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
-      success:function(people){
-      $.each(people, function (index,person) {
-        nameCollection.push(person)
+  personIdArray.map(function(people){
+    return (
+      $.ajax({
+        type: "GET",
+        url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
+        success:function(people){
+        $.each(people, function (index,person) {
+          nameCollection.push(person)
+        })
+      }
       })
-    }
-    })
-  )
-});
+    )
+  });
   // REFACTOR SIMILAR TO TV VIEW
   setTimeout(function(){renderNames(nameCollection)}, 1000);
 };
