@@ -214,11 +214,10 @@ function fetchPeepsAjax(people) {
 
 function fetchPeople(personIdArray){
   var nameCollection = []
-  personIdArray.map(function(people){
+  personIdArray.slice(0, 5).map(function(people){
     nameCollection.push(fetchPeepsAjax(people))
   });
-  setTimeout(function(){renderNames(nameCollection)}, 1000);
-  console.log(nameCollection);
+  renderNames(nameCollection);
 };
 
 function fetchRatingDataForPreviousTransactions(transactId) {
