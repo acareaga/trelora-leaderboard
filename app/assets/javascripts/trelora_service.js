@@ -97,10 +97,6 @@ function fetchPreviousTransactionCustomerName(personId) {
   })
 };
 
-
-
-
-
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
     return (customerUrl.person_id)
@@ -176,6 +172,25 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
+// function fetchPeople(personIdArray){
+//   personIdArray.slice(0, 5).map(function(people){
+//     return (
+//       $.ajax({
+//         type: "GET",
+//         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
+//         success:function(people){
+//         arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
+//           collector.push(people.person.name)
+//           return collector;
+//         }, [])
+//         console.log(arrayOfCustomers)
+//         renderNames(arrayOfCustomers)
+//       }
+//       })
+//     )
+//   });
+// };
+
 function fetchPeople(personIdArray){
   personIdArray.map(function(people){
     return (
@@ -190,6 +205,21 @@ function fetchPeople(personIdArray){
       })
     )
   });
-  // REFACTOR SIMILAR TO TV VIEW
   setTimeout(function(){renderNames(nameCollection)}, 1000);
+};
+
+
+
+function fetchRatingDataForPreviousTransactions(transactId) {
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key="+ treloraApiKey(),
+    success: function(transact) {
+      arrayOfPreviousTransactions = Object.keys(transact.ratings).reduce(function(collector, key) {
+        collector.push(transact.ratings[key])
+        return collector;
+      }, [])
+      renderPreviousRatingTransactions(arrayOfPreviousTransactions)
+    }
+  })
 };
