@@ -157,8 +157,6 @@ function fetchMemberPhoto(member){
   }
 };
 
-
-
 function fetchCustomerNames(people) {
   if (people) {
     $.ajax({
