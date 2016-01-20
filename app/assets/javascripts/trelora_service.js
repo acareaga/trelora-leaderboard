@@ -1,8 +1,6 @@
 //= require leaderboard
-//= require member_id
 //= require most_recent_ratings
 //= require newest_rating
-//= require person_id
 //= require trelora_api_key
 
 function fetchLeaderboard() {
@@ -58,17 +56,6 @@ function fetchNewestRating(transaction) {
     });
   }
 };
-
-
-
-
-function fetchPreviousRatingsForTransactionId(rating) {
-  var transactId = rating.map(function(transaction){
-    return (transaction.transact_id)
-  })
-  fetchRatingDataForPreviousTransactions(transactId[0])
-};
-
 
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
@@ -155,27 +142,6 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
-// REFACTOR SET TIMEOUT HERE
-
-// function fetchPeople(personIdArray){
-//   personIdArray.slice(0, 5).map(function(people){
-//     return (
-//       $.ajax({
-//         type: "GET",
-//         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
-//         success:function(people){
-//         arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
-//           collector.push(people.person.name[key].join(""))
-//           return collector;
-//         }, [])
-//         console.log(arrayOfCustomers)
-//         renderNames(arrayOfCustomers)
-//       }
-//       })
-//     )
-//   });
-// };
-
 function fetchMemberPhoto(member){
   if (member) {
     $.ajax({
@@ -191,21 +157,7 @@ function fetchMemberPhoto(member){
   }
 };
 
-function fetchMember(collectionOfMemberIds){
-  var memberCollection = []
-  collectionOfMemberIds.slice(0,5).map(function(member){
-    memberCollection.push(fetchMemberPhoto(member))
-  });
-  renderMemberPhotos(memberCollection);
-};
 
-function fetchPeople(personIdArray){
-  var nameCollection = []
-  personIdArray.slice(0, 5).map(function(people){
-    nameCollection.push(fetchCustomerNames(people))
-  });
-  renderNames(nameCollection);
-};
 
 function fetchCustomerNames(people) {
   if (people) {
@@ -235,15 +187,3 @@ function fetchRatingDataForPreviousTransactions(transactId) {
     }
   })
 };
-
-// memberCollection is initally in the right order
-// memberCollection is then sorted in reverse oreder but not numerically
-// THEN it it sorted by member ID lowest to highest or highest to lowest
-// WHEN it gets appeneded it comes out - 2 2 4 6 8 12 * just an example
-// Prior to the jQuery appending event, the array gets sorted
-// Convert to Object instead?
-
-// { members: [array we need first],
-//             [array we need second]}
-//
-// Object.getBy

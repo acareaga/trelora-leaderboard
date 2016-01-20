@@ -90,3 +90,10 @@ function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
 
   $("#previous_transaction").empty().append(rows)
 };
+
+function fetchPreviousRatingsForTransactionId(rating) {
+  var transactId = rating.map(function(transaction){
+    return (transaction.transact_id)
+  })
+  fetchRatingDataForPreviousTransactions(transactId[0])
+};
