@@ -7,12 +7,12 @@ function fetchPersonId(rating){
   fetchPeople(personIdArray)
 }
 
-var nameCollection = []
+// var nameCollection = []
 
 function renderNames(nameCollection){
 var name =  nameCollection.map(function(personName, index){
   return(
-    "<h3 id='people"+index+"'>"+personName.name+"</h3>"
+    "<h3 id='people"+index+"'>"+personName+"</h3>"
   )
   })
 

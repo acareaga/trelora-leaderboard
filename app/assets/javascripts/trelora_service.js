@@ -178,41 +178,48 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
-function fetchPeople(personIdArray){
-  personIdArray.slice(0, 5).map(function(people){
-    return (
-      $.ajax({
-        type: "GET",
-        url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
-        success:function(people){
-        arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
-          collector.push(people.person.name[key].join(""))
-          return collector;
-        }, [])
-        console.log(arrayOfCustomers)
-        renderNames(arrayOfCustomers)
-      }
-      })
-    )
-  });
-};
-
 // function fetchPeople(personIdArray){
-//   personIdArray.map(function(people){
+//   personIdArray.slice(0, 5).map(function(people){
 //     return (
 //       $.ajax({
 //         type: "GET",
 //         url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
 //         success:function(people){
-//         $.each(people, function (index,person) {
-//           nameCollection.push(person)
-//         })
+//         arrayOfCustomers = Object.keys(people.person.name).reduce(function(collector, key) {
+//           collector.push(people.person.name[key].join(""))
+//           return collector;
+//         }, [])
+//         console.log(arrayOfCustomers)
+//         renderNames(arrayOfCustomers)
 //       }
 //       })
 //     )
 //   });
-//   setTimeout(function(){renderNames(nameCollection)}, 1000);
 // };
+
+function fetchPeepsAjax(people) {
+  if (people) {
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
+      success:function(people){
+        var customer = people.person.name
+        succeed = customer
+       }
+  })
+    return succeed
+  }
+}
+
+function fetchPeople(personIdArray){
+  var nameCollection = []
+  personIdArray.map(function(people){
+    nameCollection.push(fetchPeepsAjax(people))
+  });
+  setTimeout(function(){renderNames(nameCollection)}, 1000);
+  console.log(nameCollection);
+};
 
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
