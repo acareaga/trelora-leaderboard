@@ -20,14 +20,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'capybara'
-require 'vcr'
 require 'simplecov'
-require 'webmock/rspec'
-
-WebMock.disable_net_connect!(allow_localhost: true)
-SimpleCov.start "rails"
-Capybara.javascript_driver = :selenium
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

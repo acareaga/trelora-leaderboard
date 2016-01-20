@@ -1,7 +1,5 @@
 $(document).ready(function(){
-  fetchLeaderboard()
-  fetchMostRecentRatings()
-  fetchMostRecentTransactionFromRatings()
-  fetchNewestRating()
+  renderSlides()
+  setInterval(renderSlides, 300000)
   slider()
 });

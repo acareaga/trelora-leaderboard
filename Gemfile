@@ -18,18 +18,10 @@ gem 'newrelic_rpm'
 group :development, :test do
   gem 'byebug'
   gem 'pry'
-  gem 'selenium-webdriver'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'capybara', '2.4.1'
+  gem 'teaspoon-jasmine'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-end
-
-group :test do
-  gem 'webmock'
-  gem 'vcr'
-  gem 'simplecov'
 end

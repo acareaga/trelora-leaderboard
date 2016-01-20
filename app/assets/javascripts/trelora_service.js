@@ -1,9 +1,14 @@
-setInterval(fetchLeaderboard, 300000);
+//= require leaderboard
+//= require member_id
+//= require most_recent_ratings
+//= require newest_rating
+//= require person_id
+//= require trelora_api_key
 
 function fetchLeaderboard() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key=<%= ENV['api_key'] %>",
+    url:  "http://api.mytrelora.com/ratings/leaderboard?api_key="+ treloraApiKey(),
     success: function(leaderboard) {
       $.each(leaderboard, function(index, agent) {
         renderLeaderboard(agent)
@@ -15,12 +20,10 @@ function fetchLeaderboard() {
   })
 };
 
-setInterval(fetchMostRecentRatings, 300000);
-
 function fetchMostRecentRatings() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=<%= ENV['api_key'] %>",
+    url:  "http://api.mytrelora.com/ratings?api_key="+ treloraApiKey(),
     success: function(ratings) {
       $.each(ratings, function(index, rating) {
         renderMostRecentRatings(rating)
@@ -34,14 +37,12 @@ function fetchMostRecentRatings() {
   })
 };
 
-setInterval(fetchNewestRating, 300000);
-
 function fetchNewestRating(transaction) {
   if(transaction){
 
     $.ajax({
       type: "GET",
-      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key=<%= ENV['api_key'] %>",
+      url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key="+ treloraApiKey(),
       success: function(ratings) {
         $.each(ratings, function(index, rating) {
           renderNewestRating(rating)
@@ -61,10 +62,6 @@ function fetchNewestRating(transaction) {
 
 
 
-
-
-// setInterval(fetchPreviousRatingsForTransactionId, 300000);
-
 function fetchPreviousRatingsForTransactionId(rating) {
   var transactId = rating.map(function(transaction){
     return (transaction.transact_id)
@@ -76,7 +73,7 @@ function fetchPreviousRatingsForTransactionId(rating) {
 function fetchRatingDataForPreviousTransactions(transactId) {
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key=<%= ENV['api_key'] %>",
+    url: "http://api.mytrelora.com/transacts/"+ transactId +"/ratings?api_key="+ treloraApiKey(),
     success: function(transact) {
       arrayOfPreviousTransactions = Object.keys(transact.ratings).reduce(function(collector, key) {
         collector.push(transact.ratings[key])
@@ -90,7 +87,7 @@ function fetchRatingDataForPreviousTransactions(transactId) {
 function fetchPreviousTransactionCustomerName(personId) {
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/people/" + personId + "?api_key=<%= ENV['api_key'] %>",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key="+ treloraApiKey(),
     success: function(customer) {
       $.each(customer, function(index, customerId) {
         var customerName = customerId.name
@@ -104,17 +101,13 @@ function fetchPreviousTransactionCustomerName(personId) {
 
 
 
-
-
-// setInterval(fetchCustomerName, 300000);
-
 function fetchCustomerName(rating) {
   var personId = rating.map(function(customerUrl){
     return (customerUrl.person_id)
   })
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/people/" + personId + "?api_key=<%= ENV['api_key'] %>",
+    url: "http://api.mytrelora.com/people/" + personId + "?api_key="+ treloraApiKey(),
     success: function(customer) {
       $.each(customer, function(index, customerId) {
         var customerName = customerId.name
@@ -124,15 +117,13 @@ function fetchCustomerName(rating) {
   })
 };
 
-// setInterval(fetchTransactionCode, 300000);
-
 function fetchTransactionCode(rating) {
   var transactId = rating.map(function(transactUrl){
     return (transactUrl.transact_id)
   })
   $.ajax({
     type: "GET",
-    url: "http://api.mytrelora.com/transacts/" + transactId + "?api_key=<%= ENV['api_key'] %>",
+    url: "http://api.mytrelora.com/transacts/" + transactId + "?api_key="+ treloraApiKey(),
     success: function(transaction) {
       $.each(transaction, function(index, transaction_id) {
         var code = transaction_id.code
@@ -142,12 +133,10 @@ function fetchTransactionCode(rating) {
   })
 };
 
-// setInterval(fetchMemberToPage, 300000);
-
 function fetchMemberToPage(memberPicture){
 $.ajax({
   type: "GET",
-  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key=<%= ENV['api_key'] %>",
+  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
   success:function(memberPhoto){
    var photograph =  memberPhoto.member.avatar.avatar.url
    renderPhotoToPage(photograph)
@@ -155,15 +144,13 @@ $.ajax({
   })
 };
 
-// setInterval(fetchMemberPhoto, 300000);
-
 function fetchMemberPhoto(collectionOfMemberIds){
   collectionOfMemberIds.map(function(member){
 
       return (
         $.ajax({
           type: "GET",
-          url: "http://api.mytrelora.com/members/"+ member +"?api_key=<%= ENV['api_key'] %>",
+          url: "http://api.mytrelora.com/members/"+ member +"?api_key="+ treloraApiKey(),
           success:function(member){
             $.each(member, function (index, member) {
               memberCollection.push(member)
@@ -174,12 +161,10 @@ function fetchMemberPhoto(collectionOfMemberIds){
     })
   };
 
-// setInterval(fetchMostRecentTransactionFromRatings, 300000);
-
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
     type: "GET",
-    url:  "http://api.mytrelora.com/ratings?api_key=<%= ENV['api_key'] %>",
+    url:  "http://api.mytrelora.com/ratings?api_key="+ treloraApiKey(),
     success: function(data) {
       $.each(data, function(index, allRatings) {
         fetchTransactionId(allRatings)
@@ -191,14 +176,12 @@ function fetchMostRecentTransactionFromRatings() {
   })
 };
 
-// setInterval(fetchPeople, 300000);
-
 function fetchPeople(personIdArray){
 personIdArray.map(function(people){
   return (
     $.ajax({
       type: "GET",
-      url: "http://api.mytrelora.com/people/"+ people +"?api_key=<%= ENV['api_key'] %>",
+      url: "http://api.mytrelora.com/people/"+ people +"?api_key="+ treloraApiKey(),
       success:function(people){
       $.each(people, function (index,person) {
         nameCollection.push(person)
@@ -207,5 +190,6 @@ personIdArray.map(function(people){
     })
   )
 });
+  // REFACTOR SIMILAR TO TV VIEW
   setTimeout(function(){renderNames(nameCollection)}, 1000);
 };
