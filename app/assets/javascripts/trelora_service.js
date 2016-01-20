@@ -176,6 +176,14 @@ function fetchMostRecentTransactionFromRatings() {
 //   });
 // };
 
+function fetchMember(collectionOfMemberIds){
+  var memberCollection = []
+  collectionOfMemberIds.slice(0,5).map(function(member){
+    memberCollection.push(fetchMemberPhoto(member))
+  });
+  renderMemberPhotos(memberCollection);
+};
+
 function fetchMemberPhoto(member){
   if (member) {
     $.ajax({
@@ -189,14 +197,6 @@ function fetchMemberPhoto(member){
     })
     return succeed
   }
-};
-
-function fetchMember(collectionOfMemberIds){
-  var memberCollection = []
-  collectionOfMemberIds.slice(0,5).map(function(member){
-    memberCollection.push(fetchMemberPhoto(member))
-  });
-  renderMemberPhotos(memberCollection);
 };
 
 function fetchPeople(personIdArray){
