@@ -28,7 +28,7 @@ function fetchMostRecentRatings() {
       $.each(ratings, function(index, rating) {
         renderMostRecentRatings(rating)
         fetchPersonId(rating)
-        fetchMemberId(rating)
+        fetchMember(rating)
       }
     )},
     error: function(xhr) {
@@ -140,29 +140,6 @@ $.ajax({
   })
 };
 
-
-// REFACTOR SET TIMEOUT HERE
-
-var memberCollection = []
-
-function fetchMemberPhoto(collectionOfMemberIds){
-  collectionOfMemberIds.map(function(member){
-    return (
-      $.ajax({
-        type: "GET",
-        url: "http://api.mytrelora.com/members/"+ member +"?api_key="+ treloraApiKey(),
-        success:function(member){
-          $.each(member, function (index, member, ar) {
-            memberCollection.push(member)
-          })
-        }
-      })
-    )
-  })
-  setTimeout(function(){renderMemberPhotos(memberCollection)}, 1000);
-};
-
-
 function fetchMostRecentTransactionFromRatings() {
   $.ajax({
     type: "GET",
@@ -177,6 +154,8 @@ function fetchMostRecentTransactionFromRatings() {
     }
   })
 };
+
+// REFACTOR SET TIMEOUT HERE
 
 // function fetchPeople(personIdArray){
 //   personIdArray.slice(0, 5).map(function(people){
@@ -197,7 +176,38 @@ function fetchMostRecentTransactionFromRatings() {
 //   });
 // };
 
-function fetchPeepsAjax(people) {
+function fetchMemberPhoto(member){
+  if (member) {
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "http://api.mytrelora.com/members/"+ member.member_ids[0] +"?api_key="+ treloraApiKey(),
+      success:function(member){
+        var agent = member.member.avatar.avatar.url
+        succeed = agent
+      }
+    })
+    return succeed
+  }
+};
+
+function fetchMember(collectionOfMemberIds){
+  var memberCollection = []
+  collectionOfMemberIds.slice(0,5).map(function(member){
+    memberCollection.push(fetchMemberPhoto(member))
+  });
+  renderMemberPhotos(memberCollection);
+};
+
+function fetchPeople(personIdArray){
+  var nameCollection = []
+  personIdArray.slice(0, 5).map(function(people){
+    nameCollection.push(fetchCustomerNames(people))
+  });
+  renderNames(nameCollection);
+};
+
+function fetchCustomerNames(people) {
   if (people) {
     $.ajax({
       async: false,
@@ -207,17 +217,9 @@ function fetchPeepsAjax(people) {
         var customer = people.person.name
         succeed = customer
        }
-  })
+    })
     return succeed
   }
-}
-
-function fetchPeople(personIdArray){
-  var nameCollection = []
-  personIdArray.slice(0, 5).map(function(people){
-    nameCollection.push(fetchPeepsAjax(people))
-  });
-  renderNames(nameCollection);
 };
 
 function fetchRatingDataForPreviousTransactions(transactId) {

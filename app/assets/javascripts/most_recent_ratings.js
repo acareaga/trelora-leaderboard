@@ -42,7 +42,7 @@ function renderMemberPhotos(memberCollection) {
   var rows = memberCollection.map(function(member) {
     return (
       "<h4 class='ui image header'>"
-        +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
+        +"<img src='"+ member +" 'class='ui tiny circular image'>"
       +"</h4>"
     )
   });
