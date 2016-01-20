@@ -5,7 +5,7 @@ function fetchMemberId(rating){
   fetchMemberPhoto(collectionOfMemberIds)
 };
 
-// avoud globals
+// avoid globals
 var memberCollection = []
 
 // function renderMemberName(rating){

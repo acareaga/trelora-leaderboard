@@ -64,17 +64,9 @@ function renderPreviousTransactionCustomerName(customerName) {
   $("#previous_transaction_customer_name").append(customerName)
 };
 
-function formatDateTime(time) {
-  debugger;
-  now = Date.new()
-  time_ago = now - time
-};
-
 function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
   var rows = arrayOfPreviousTransactions.slice(1, 2).map(function(transaction) {
     fetchPreviousTransactionCustomerName(transaction.person_id)
-    formatDateTime(transaction.created_at)
-    debugger;
     return (
         "<tr>"
        +"<td class='six wide column'>"
