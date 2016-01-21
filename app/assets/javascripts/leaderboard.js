@@ -3,12 +3,12 @@ function renderLeaderboard(agent) {
     return (
          "<tr>"
         +"<td>"
-          +"<h4 class='ui image header'>"
+          +"<h4 class='ui image header' id='member_photo'>"
             +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
           +"</h4>"
         +"</td>"
         +"<td>"
-          +"<div class='content'>"
+          +"<div class='content' id='member_name'>"
           +"<h2>"+ member.name +"</h2>"
           +"<div class='sub header'>Lead Agent"
           +"</div>"
@@ -16,7 +16,7 @@ function renderLeaderboard(agent) {
         +"</td>"
         +"<td>"
           +"<div class='ui statistic'>"
-            +"<div class='value'>"
+            +"<div class='value' id='member_rating'>"
               + member.ratings_average.toFixed(1)
             +"</div>"
             +"<div class='label'>"
