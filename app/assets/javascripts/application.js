@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require semantic-ui
 //= require jquery.slick
+// require dateFormat.js
 //= require_tree .
