@@ -3,6 +3,7 @@ require 'spec_helper'
 feature 'User visits the leaderboard slide' do
   scenario 'they see a ranking of agents and ratings on the page', :js => true do
     visit root_path
+    sleep(70.second)
 
     expect(page).to have_content('LeaderBoard')
 

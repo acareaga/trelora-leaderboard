@@ -37983,23 +37983,6 @@ function fetchRatingDataForPreviousTransactions(transactId) {
     }
   })
 };
-
-function renderSlides() {
-  fetchLeaderboard()
-  fetchMostRecentRatings()
-  fetchMostRecentTransactionFromRatings()
-  fetchNewestRating()
-}
-;
-function slider() {
-  $('.slider').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1 ,
-    autoplay: true,
-    autoplaySpeed: 30000,
-    arrows: false
-  })
-};
 function renderWeather(){
   $.ajax({
     type: "GET",
@@ -38019,6 +38002,26 @@ function renderGifToPage(weather){
   }else if (weather == "Snow") {
     $('.background').css("background-image", "url(http://i.giphy.com/Yy26NRbpB9lDi.gif)");
   }
+};
+
+
+
+function renderSlides() {
+  fetchLeaderboard()
+  fetchMostRecentRatings()
+  fetchMostRecentTransactionFromRatings()
+  fetchNewestRating()
+  renderWeather()
+}
+;
+function slider() {
+  $('.slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1 ,
+    autoplay: true,
+    autoplaySpeed: 30000,
+    arrows: false
+  })
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
