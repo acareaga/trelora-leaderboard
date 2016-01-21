@@ -18,7 +18,9 @@ gem 'newrelic_rpm'
 group :development, :test do
   gem 'byebug'
   gem 'pry'
-  gem 'teaspoon-jasmine'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do
