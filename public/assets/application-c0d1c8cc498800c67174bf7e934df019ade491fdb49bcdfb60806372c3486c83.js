@@ -37099,12 +37099,12 @@ function renderLeaderboard(agent) {
     return (
          "<tr>"
         +"<td>"
-          +"<h4 class='ui image header'>"
+          +"<h4 class='ui image header' id='leaderboard_member_photo'>"
             +"<img src='"+ member.avatar.avatar.url +" 'class='ui tiny circular image'>"
           +"</h4>"
         +"</td>"
         +"<td>"
-          +"<div class='content'>"
+          +"<div class='content' id='leaderboard_member_name'>"
           +"<h2>"+ member.name +"</h2>"
           +"<div class='sub header'>Lead Agent"
           +"</div>"
@@ -37112,7 +37112,7 @@ function renderLeaderboard(agent) {
         +"</td>"
         +"<td>"
           +"<div class='ui statistic'>"
-            +"<div class='value'>"
+            +"<div class='value' id='leaderboard_member_rating'>"
               + member.ratings_average.toFixed(1)
             +"</div>"
             +"<div class='label'>"
@@ -37126,6 +37126,7 @@ function renderLeaderboard(agent) {
 };
 $(document).ready(function(){
   renderSlides()
+  renderWeather()
   setInterval(renderSlides, 300000)
   slider()
 });
@@ -37134,23 +37135,23 @@ function renderMostRecentRatings(rating) {
     return (
          "<tr>"
         +"<td class='five wide column'>"
-          +"<div class='content'>"
+          +"<div class='content' id='most_recent_customer_name'>"
           +"<h3 id='people"+index+"'></h3>"
           +"<div class='sub header'>Customer"
           +"</div>"
         +"</td>"
         +"<td class='three wide'>"
-          +"<div class='content'>"
+          +"<div class='content' id='most_recent_feedback_code'>"
           +"<h3>"+ feedback.code.replace(/_/g, ' ') +"</h3>"
           +"</div>"
         +"</td>"
         +"<td class='six wide'>"
-          +"<div class='content'>"
+          +"<div class='content'id='most_recent_feedback_comments'>"
           +"<h3>"+ feedback.comments.substring(0,250) +"</h3>"
           +"</div>"
           +"<td>"
           +"<div class='ui statistic'>"
-            +"<div class='value'>"
+            +"<div class='value' id='most_recent_feedback_rating'>"
               + feedback.stars.toFixed(1)
             +"</div>"
             +"<div class='label'>"
@@ -37158,7 +37159,7 @@ function renderMostRecentRatings(rating) {
             +"</div>"
           +"</div>"
           +"</td>"
-          +"<td class='four wide'>"
+          +"<td class='four wide' id='most_recent_member_photo'>"
             +"<h4 class='ui image header' id='most_recent_member_photos"+index+"'>"
             +"</h4><br><br>"
         +"</td><br><br></tr>"
@@ -37230,22 +37231,22 @@ function renderNewestRating(rating) {
   var row = rating.slice(0, 1).map(function(transaction,index) {
     return (
           "<div class='ui grid'>"
-          +"<div class='four wide column divided'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
+          +"<div class='four wide column divided'><h1 id='newest_transaction_rating'>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
           +"</div>"
           +"<div class='ui centered grid'>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='two wide column'></div>"
           +"<div class='ui divided grid'>"
-          +"<div class='eight wide column'><h2>"+ transaction.code.replace(/_/g, ' ') +"</h2><h3 id='customer_name'></h3><h3 id='transaction_code'></h3></div>"
+          +"<div class='eight wide column'><h2 id='newest_transaction_feedback_code'>"+ transaction.code.replace(/_/g, ' ') +"</h2><h3 id='customer_name'></h3><h3 id='transaction_code'></h3></div>"
           +"<div class='eight wide column'><h4 class='ui image header' id='member_photo'></h4></div></div>"
           +"<div class='two wide column'></div>"
-          +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
+          +"<div class='twelve wide column'><h1 id='newest_transaction_feedback_comments'>"+ transaction.comments.substring(0,250) +"</h1></div>"
           +"<div class='two wide column'></div>"
           +"<div class='four wide column'></div>"
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
           +"<div class='ui grid'></div>"
-          +"<h2 class='ui horizontal divider header'>Description  </h2>"
+          +"<h2 class='ui horizontal divider header'>Previous Ratings</h2>"
           +"<div class='sixteen wide column'>"
           +"<div class='ui centered grid'>"
           +"<table class='ui very basic celled table'>"
@@ -37269,12 +37270,12 @@ function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
          +"</div>"
        +"</td>"
        +"<td class='six wide column'>"
-         +"<div class='content'>"
+         +"<div class='content' id='transaction_feedback_created_at'>"
          +"<h3>"+ transaction.created_at +"</h3>"
          +"</div>"
        +"</td>"
        +"<td class='four wide column'>"
-         +"<div class='content'>"
+         +"<div class='content' id='transaction_feedback_rating'>"
          +"<h3>"+ transaction.stars +" Stars</h3>"
          +"</div>"
        +"</td></tr>"
@@ -37521,9 +37522,29 @@ function slider() {
     slidesToShow: 1,
     slidesToScroll: 1 ,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 30000,
     arrows: false
   })
+};
+function renderWeather(){
+  $.ajax({
+    type: "GET",
+    url: "http://api.openweathermap.org/data/2.5/weather?zip=80202,us&appid=2de143494c0b295cca9337e1e96b00e0",
+    success: function(currentWeather){
+      var weather = currentWeather.weather[0].main
+      renderGifToPage(weather)
+    }
+  })
+};
+
+function renderGifToPage(weather){
+  if (weather == "Clouds"){
+    $('.background').css("background-image", "url(http://i.giphy.com/hL8a3mIQK8Ehy.gif)");
+  }else if (weather == "Rain") {
+        $('.background').css("background-image", "url(http://i.giphy.com/KWuI55w6kpMFq.gif)");
+  }else if (weather == "Snow") {
+    $('.background').css("background-image", "url(http://i.giphy.com/Yy26NRbpB9lDi.gif)");
+  }
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
