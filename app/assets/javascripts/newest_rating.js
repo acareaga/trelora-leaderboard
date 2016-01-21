@@ -2,32 +2,28 @@ function renderNewestRating(rating) {
   var row = rating.slice(0, 1).map(function(transaction,index) {
     return (
           "<div class='ui grid'>"
-          +"<div class='one wide column'><h1><i class='home icon'></i></h1></div>"
-          +"<div class='four wide column'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
-          +"<div class='eight wide column'></div>"
-          +"<div class='three wide column'><h4 class='ui image header' id='member_photo'></h4></div>"
+          +"<div class='four wide column divided'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
+          +"</div>"
+          +"<div class='ui centered grid'>"
           +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='ui divided grid'>"
+          +"<div class='eight wide column'><h2>"+ transaction.code.replace(/_/g, ' ') +"</h2><h3 id='customer_name'></h3><h3 id='transaction_code'></h3></div>"
+          +"<div class='eight wide column'><h4 class='ui image header' id='member_photo'></h4></div></div>"
           +"<div class='two wide column'></div>"
           +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
           +"<div class='two wide column'></div>"
-          +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h2>"+ transaction.code.replace(/_/g, ' ') +"</h2></div>"
-          +"<div class='four wide column'><h2>- " + transaction.stars.toFixed(0) + " Stars!</h2></div>"
-          +"<div class='four wide column'></div>"
-          +"<div class='sixteen wide column'></div>"
-          +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h3 id='customer_name'></h3></div>"
-          +"<div class='six wide column'><h3 id='transaction_code'></h3></div>"
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
-          +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
+          +"<div class='ui grid'></div>"
+          +"<h2 class='ui horizontal divider header'>Description  </h2>"
           +"<div class='sixteen wide column'>"
           +"<div class='ui centered grid'>"
           +"<table class='ui very basic celled table'>"
             +"<tbody id='previous_transaction'>"
             +"</tbody>"
-          +"</table></div></div>"
+          +"</table></div>"
       )
   });
   $("#newest_rating").empty().append(row)
@@ -47,7 +43,7 @@ function renderMemberName(rating){
 
 function renderPhotoToPage(photograph){
   var pic = photograph
-  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui tiny circular image'>"
+  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui medium circular image'>"
 
   $("#member_photo").append(memberCirclePhoto)
 };
