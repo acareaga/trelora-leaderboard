@@ -42,7 +42,7 @@ function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
        +"</td>"
        +"<td class='six wide column'>"
          +"<div class='content' id='transaction_feedback_created_at'>"
-         +"<h3>"+ transaction.created_at +"</h3>"
+         +"<h3>" +jQuery.format.prettyDate(transaction.created_at)+"</h3>"
          +"</div>"
        +"</td>"
        +"<td class='four wide column'>"
