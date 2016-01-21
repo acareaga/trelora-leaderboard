@@ -11,16 +11,15 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-gem 'hurley'
 gem 'jquery-slick-rails'
 gem 'newrelic_rpm'
 
 group :development, :test do
-  gem 'byebug'
   gem 'pry'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'simplecov'
 end
 
 group :development do

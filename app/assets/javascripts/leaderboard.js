@@ -1,6 +1,4 @@
-
 function renderLeaderboard(agent) {
-
   var rows = agent.members.slice(0, 5).map(function(member) {
     return (
          "<tr>"
@@ -26,8 +24,7 @@ function renderLeaderboard(agent) {
             +"</div>"
           +"</div><br>"
         +"</td></tr>"
-      )
+    )
   });
-
   $("#leaderboard").empty().append(rows)
 };

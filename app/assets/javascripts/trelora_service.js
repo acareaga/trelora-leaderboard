@@ -37,7 +37,6 @@ function fetchMostRecentRatings() {
 
 function fetchNewestRating(transaction) {
   if(transaction){
-
     $.ajax({
       type: "GET",
       url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key="+ treloraApiKey(),
@@ -117,13 +116,13 @@ function fetchTransactionCode(rating) {
 };
 
 function fetchMemberToPage(memberPicture){
-$.ajax({
-  type: "GET",
-  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
-  success:function(memberPhoto){
-   var photograph =  memberPhoto.member.avatar.avatar.url
-   renderPhotoToPage(photograph)
-  }
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
+    success:function(memberPhoto){
+      var photograph =  memberPhoto.member.avatar.avatar.url
+      renderPhotoToPage(photograph)
+    }
   })
 };
 

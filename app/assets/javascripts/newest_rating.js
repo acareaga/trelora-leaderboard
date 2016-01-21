@@ -29,37 +29,6 @@ function renderNewestRating(rating) {
   $("#newest_rating").empty().append(row)
 };
 
-function fetchTransactionId(allRatings){
-  fetchNewestRating(allRatings[0].transact_id)
-}
-
-function renderMemberName(rating){
-  var member = rating.slice(0, 1).map(function(transaction) {
-    return transaction.member_ids
-  });
-  memberPicture = member[0]
-  fetchMemberToPage(memberPicture)
- };
-
-function renderPhotoToPage(photograph){
-  var pic = photograph
-  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui medium circular image'>"
-
-  $("#member_photo").append(memberCirclePhoto)
-};
-
-function renderTransactionCode(code){
-  $("#transaction_code").append(code)
-};
-
-function renderCustomerName(customerName){
-  $("#customer_name").append(customerName)
-};
-
-function renderPreviousTransactionCustomerName(customerName) {
-  $("#previous_transaction_customer_name").append(customerName)
-};
-
 function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
   var rows = arrayOfPreviousTransactions.slice(1, 2).map(function(transaction) {
     fetchPreviousTransactionCustomerName(transaction.person_id)
@@ -83,8 +52,37 @@ function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
        +"</td></tr>"
     )
   });
-
   $("#previous_transaction").empty().append(rows)
+};
+
+function fetchTransactionId(allRatings){
+  fetchNewestRating(allRatings[0].transact_id)
+}
+
+function renderMemberName(rating){
+  var member = rating.slice(0, 1).map(function(transaction) {
+    return transaction.member_ids
+  });
+  memberPicture = member[0]
+  fetchMemberToPage(memberPicture)
+};
+
+function renderPhotoToPage(photograph){
+  var pic = photograph
+  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui medium circular image'>"
+  $("#member_photo").append(memberCirclePhoto)
+};
+
+function renderTransactionCode(code){
+  $("#transaction_code").append(code)
+};
+
+function renderCustomerName(customerName){
+  $("#customer_name").append(customerName)
+};
+
+function renderPreviousTransactionCustomerName(customerName) {
+  $("#previous_transaction_customer_name").append(customerName)
 };
 
 function fetchPreviousRatingsForTransactionId(rating) {

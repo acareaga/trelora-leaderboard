@@ -1,5 +1,4 @@
 function renderMostRecentRatings(rating) {
-  var starDifference = rating.slice(0, 5).map(function(feedback){return feedback.star_diff = 5 - feedback.stars})
   var rows = rating.slice(0, 5).map(function(feedback,index) {
     return (
          "<tr>"
@@ -32,10 +31,24 @@ function renderMostRecentRatings(rating) {
             +"<h4 class='ui image header' id='most_recent_member_photos"+index+"'>"
             +"</h4><br><br>"
         +"</td><br><br></tr>"
-      )
+    )
   });
-
   $("#most_recent_ratings").empty().append(rows)
+};
+
+function fetchMember(collectionOfMemberIds){
+  var memberCollection = []
+  collectionOfMemberIds.slice(0,5).map(function(member){
+    memberCollection.push(fetchMemberPhoto(member))
+  });
+  renderMemberPhotos(memberCollection);
+};
+
+function fetchMemberId(rating){
+  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
+    return(memberIds.member_ids)
+  });
+  fetchMemberPhoto(collectionOfMemberIds)
 };
 
 function renderMemberPhotos(memberCollection) {
@@ -51,14 +64,6 @@ function renderMemberPhotos(memberCollection) {
   $("#most_recent_member_photos2").empty().append(rows[2])
   $("#most_recent_member_photos3").empty().append(rows[3])
   $("#most_recent_member_photos4").empty().append(rows[4])
-
-};
-function fetchMember(collectionOfMemberIds){
-  var memberCollection = []
-  collectionOfMemberIds.slice(0,5).map(function(member){
-    memberCollection.push(fetchMemberPhoto(member))
-  });
-  renderMemberPhotos(memberCollection);
 };
 
 function fetchPeople(personIdArray){
@@ -68,12 +73,6 @@ function fetchPeople(personIdArray){
   });
   renderNames(nameCollection);
 };
-function fetchMemberId(rating){
-  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
-    return(memberIds.member_ids)
-  });
-  fetchMemberPhoto(collectionOfMemberIds)
-};
 
 function fetchPersonId(rating){
   var personIdArray = rating.map(function(personIds){
@@ -82,7 +81,7 @@ function fetchPersonId(rating){
     )
   });
   fetchPeople(personIdArray)
-}
+};
 
 function renderNames(nameCollection){
   var name =  nameCollection.map(function(personName, index){
@@ -95,4 +94,4 @@ function renderNames(nameCollection){
   $("#people2").append(name[2])
   $("#people3").append(name[3])
   $("#people4").append(name[4])
-}
+};
