@@ -7,9 +7,9 @@ feature 'User visits the leaderboard slide' do
     expect(page).to have_content('LeaderBoard')
 
     within(:css, "#leaderboard") do
-      expect(page).to have_css '#member_photo'
-      expect(page).to have_css '#member_name'
-      expect(page).to have_css '#member_rating'
+      expect(page).to have_css '#leaderboard_member_photo'
+      expect(page).to have_css '#leaderboard_member_name'
+      expect(page).to have_css '#leaderboard_member_rating'
       expect(page).to have_content('5.0 RATING')
       expect(page).to have_content('Lead Agent')
     end
