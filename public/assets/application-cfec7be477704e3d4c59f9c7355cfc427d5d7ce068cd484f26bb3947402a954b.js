@@ -37094,9 +37094,7 @@ $.fn.video.settings.templates = {
   };
 
 }));
-
 function renderLeaderboard(agent) {
-
   var rows = agent.members.slice(0, 5).map(function(member) {
     return (
          "<tr>"
@@ -37122,9 +37120,8 @@ function renderLeaderboard(agent) {
             +"</div>"
           +"</div><br>"
         +"</td></tr>"
-      )
+    )
   });
-
   $("#leaderboard").empty().append(rows)
 };
 $(document).ready(function(){
@@ -37133,19 +37130,18 @@ $(document).ready(function(){
   slider()
 });
 function renderMostRecentRatings(rating) {
-  var starDifference = rating.slice(0, 5).map(function(feedback){return feedback.star_diff = 5 - feedback.stars})
   var rows = rating.slice(0, 5).map(function(feedback,index) {
     return (
          "<tr>"
-        +"<td class='four wide column'>"
+        +"<td class='five wide column'>"
           +"<div class='content'>"
           +"<h3 id='people"+index+"'></h3>"
           +"<div class='sub header'>Customer"
           +"</div>"
         +"</td>"
-        +"<td class='four wide'>"
+        +"<td class='three wide'>"
           +"<div class='content'>"
-          +"<h3>"+ feedback.code +"</h3>"
+          +"<h3>"+ feedback.code.replace(/_/g, ' ') +"</h3>"
           +"</div>"
         +"</td>"
         +"<td class='six wide'>"
@@ -37166,10 +37162,24 @@ function renderMostRecentRatings(rating) {
             +"<h4 class='ui image header' id='most_recent_member_photos"+index+"'>"
             +"</h4><br><br>"
         +"</td><br><br></tr>"
-      )
+    )
   });
-
   $("#most_recent_ratings").empty().append(rows)
+};
+
+function fetchMember(collectionOfMemberIds){
+  var memberCollection = []
+  collectionOfMemberIds.slice(0,5).map(function(member){
+    memberCollection.push(fetchMemberPhoto(member))
+  });
+  renderMemberPhotos(memberCollection);
+};
+
+function fetchMemberId(rating){
+  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
+    return(memberIds.member_ids)
+  });
+  fetchMemberPhoto(collectionOfMemberIds)
 };
 
 function renderMemberPhotos(memberCollection) {
@@ -37185,14 +37195,6 @@ function renderMemberPhotos(memberCollection) {
   $("#most_recent_member_photos2").empty().append(rows[2])
   $("#most_recent_member_photos3").empty().append(rows[3])
   $("#most_recent_member_photos4").empty().append(rows[4])
-
-};
-function fetchMember(collectionOfMemberIds){
-  var memberCollection = []
-  collectionOfMemberIds.slice(0,5).map(function(member){
-    memberCollection.push(fetchMemberPhoto(member))
-  });
-  renderMemberPhotos(memberCollection);
 };
 
 function fetchPeople(personIdArray){
@@ -37202,12 +37204,6 @@ function fetchPeople(personIdArray){
   });
   renderNames(nameCollection);
 };
-function fetchMemberId(rating){
-  var collectionOfMemberIds = rating.slice(0,5).map(function(memberIds){
-    return(memberIds.member_ids)
-  });
-  fetchMemberPhoto(collectionOfMemberIds)
-};
 
 function fetchPersonId(rating){
   var personIdArray = rating.map(function(personIds){
@@ -37216,7 +37212,7 @@ function fetchPersonId(rating){
     )
   });
   fetchPeople(personIdArray)
-}
+};
 
 function renderNames(nameCollection){
   var name =  nameCollection.map(function(personName, index){
@@ -37229,72 +37225,36 @@ function renderNames(nameCollection){
   $("#people2").append(name[2])
   $("#people3").append(name[3])
   $("#people4").append(name[4])
-}
-;
+};
 function renderNewestRating(rating) {
   var row = rating.slice(0, 1).map(function(transaction,index) {
     return (
           "<div class='ui grid'>"
-          +"<div class='one wide column'><h1><i class='home icon'></i></h1></div>"
-          +"<div class='four wide column'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
-          +"<div class='eight wide column'></div>"
-          +"<div class='three wide column'><h4 class='ui image header' id='member_photo'></h4></div>"
+          +"<div class='four wide column divided'><h1>Newest Rating: " + transaction.stars.toFixed(0) + "!</h1></div>"
+          +"</div>"
+          +"<div class='ui centered grid'>"
           +"<div class='sixteen wide column'></div>"
+          +"<div class='two wide column'></div>"
+          +"<div class='ui divided grid'>"
+          +"<div class='eight wide column'><h2>"+ transaction.code.replace(/_/g, ' ') +"</h2><h3 id='customer_name'></h3><h3 id='transaction_code'></h3></div>"
+          +"<div class='eight wide column'><h4 class='ui image header' id='member_photo'></h4></div></div>"
           +"<div class='two wide column'></div>"
           +"<div class='twelve wide column'><h1>"+ transaction.comments.substring(0,250) +"</h1></div>"
           +"<div class='two wide column'></div>"
-          +"<div class='sixteen wide column'></div>"
           +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h2>"+ transaction.code +"</h2></div>"
-          +"<div class='four wide column'><h2>- " + transaction.stars.toFixed(0) + " Stars!</h2></div>"
-          +"<div class='four wide column'></div>"
-          +"<div class='sixteen wide column'></div>"
-          +"<div class='four wide column'></div>"
-          +"<div class='four wide column'><h3 id='customer_name'></h3></div>"
-          +"<div class='six wide column'><h3 id='transaction_code'></h3></div>"
           +"<div class='two wide column'></div>"
           +"<div class='sixteen wide column'></div>"
-          +"<div class='sixteen wide column'><h2>Previous Ratings</h2></div>"
+          +"<div class='ui grid'></div>"
+          +"<h2 class='ui horizontal divider header'>Description  </h2>"
           +"<div class='sixteen wide column'>"
           +"<div class='ui centered grid'>"
           +"<table class='ui very basic celled table'>"
             +"<tbody id='previous_transaction'>"
             +"</tbody>"
-          +"</table></div></div>"
+          +"</table></div>"
       )
   });
   $("#newest_rating").empty().append(row)
-};
-
-function fetchTransactionId(allRatings){
-  fetchNewestRating(allRatings[0].transact_id)
-}
-
-function renderMemberName(rating){
-  var member = rating.slice(0, 1).map(function(transaction) {
-    return transaction.member_ids
-  });
-  memberPicture = member[0]
-  fetchMemberToPage(memberPicture)
- };
-
-function renderPhotoToPage(photograph){
-  var pic = photograph
-  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui tiny circular image'>"
-
-  $("#member_photo").append(memberCirclePhoto)
-};
-
-function renderTransactionCode(code){
-  $("#transaction_code").append(code)
-};
-
-function renderCustomerName(customerName){
-  $("#customer_name").append(customerName)
-};
-
-function renderPreviousTransactionCustomerName(customerName) {
-  $("#previous_transaction_customer_name").append(customerName)
 };
 
 function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
@@ -37320,8 +37280,37 @@ function renderPreviousRatingTransactions(arrayOfPreviousTransactions){
        +"</td></tr>"
     )
   });
-
   $("#previous_transaction").empty().append(rows)
+};
+
+function fetchTransactionId(allRatings){
+  fetchNewestRating(allRatings[0].transact_id)
+}
+
+function renderMemberName(rating){
+  var member = rating.slice(0, 1).map(function(transaction) {
+    return transaction.member_ids
+  });
+  memberPicture = member[0]
+  fetchMemberToPage(memberPicture)
+};
+
+function renderPhotoToPage(photograph){
+  var pic = photograph
+  var memberCirclePhoto = "<img src='"+ photograph +" 'class='ui medium circular image'>"
+  $("#member_photo").append(memberCirclePhoto)
+};
+
+function renderTransactionCode(code){
+  $("#transaction_code").append(code)
+};
+
+function renderCustomerName(customerName){
+  $("#customer_name").append(customerName)
+};
+
+function renderPreviousTransactionCustomerName(customerName) {
+  $("#previous_transaction_customer_name").append(customerName)
 };
 
 function fetchPreviousRatingsForTransactionId(rating) {
@@ -37372,7 +37361,6 @@ function fetchMostRecentRatings() {
 
 function fetchNewestRating(transaction) {
   if(transaction){
-
     $.ajax({
       type: "GET",
       url:  "http://api.mytrelora.com/transacts/"+ transaction +"/ratings?api_key="+ treloraApiKey(),
@@ -37452,13 +37440,13 @@ function fetchTransactionCode(rating) {
 };
 
 function fetchMemberToPage(memberPicture){
-$.ajax({
-  type: "GET",
-  url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
-  success:function(memberPhoto){
-   var photograph =  memberPhoto.member.avatar.avatar.url
-   renderPhotoToPage(photograph)
-  }
+  $.ajax({
+    type: "GET",
+    url: "http://api.mytrelora.com/members/"+ memberPicture +"?api_key="+ treloraApiKey(),
+    success:function(memberPhoto){
+      var photograph =  memberPhoto.member.avatar.avatar.url
+      renderPhotoToPage(photograph)
+    }
   })
 };
 

@@ -37929,6 +37929,11 @@ body {
 }
 
 /* line 75, /Users/acareaga/Turing/mod3/ratinganimals/app/assets/stylesheets/application.css.scss */
+.commentfont {
+  font-size: 200%;
+}
+
+/* line 79, /Users/acareaga/Turing/mod3/ratinganimals/app/assets/stylesheets/application.css.scss */
 #standard-font {
   font-family: 'Montserrat', sans-serif;
 }
