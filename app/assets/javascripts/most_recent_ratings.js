@@ -3,15 +3,15 @@ function renderMostRecentRatings(rating) {
   var rows = rating.slice(0, 5).map(function(feedback,index) {
     return (
          "<tr>"
-        +"<td class='four wide column'>"
+        +"<td class='five wide column'>"
           +"<div class='content'>"
           +"<h3 id='people"+index+"'></h3>"
           +"<div class='sub header'>Customer"
           +"</div>"
         +"</td>"
-        +"<td class='four wide'>"
+        +"<td class='three wide'>"
           +"<div class='content'>"
-          +"<h3>"+ feedback.code +"</h3>"
+          +"<h3>"+ feedback.code.replace(/_/g, ' ') +"</h3>"
           +"</div>"
         +"</td>"
         +"<td class='six wide'>"
