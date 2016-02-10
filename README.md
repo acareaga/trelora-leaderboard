@@ -1,6 +1,6 @@
 # Trelora LeaderBoard
 
-The personal project is the final pair project in Module 3 at Turing. It's a Rails and React application that displays internal transaction data, customer feedback, and the agent leaderboard on office TV screens.
+An internal dashboard built for [Trelora](http://www.trelora.com/), a real estate company located in Denver, CO. The application displays transaction data, customer feedback, and agent rankings on office TVs. Pair Project. Private repo for internal use.
 
 [Project Outline](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/self_directed_project.md)
 
@@ -18,9 +18,14 @@ The personal project is the final pair project in Module 3 at Turing. It's a Rai
 * complete with a partner over a period of 2 weeks
 
 ### Features
-* Views will cycle every 30 seconds
-* Dynamic background will change based on the weather.
-* ![normal](images/normal.gif)
-* ![cloudy](images/clouds.gif)
-* ![rain](images/rain.gif)
-* ![snow](images/snow.gif)
+* Rails Application implemented entirely in jQuery and AJAX
+* Views cycle every 30 seconds
+* Dynamic background that transitions with the weather
+* Designed with Trelora branding using Semantic UI
+* Behavior Driven Development using Rspec, Selenium, and Capybara
+* Performance measured using New Relic
+
+![normal](images/normal.gif)
+![cloudy](images/clouds.gif)
+![rain](images/rain.gif)
+![snow](images/snow.gif)
