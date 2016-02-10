@@ -20,7 +20,7 @@ The personal project is the final pair project in Module 3 at Turing. It's a Rai
 ### Features
 * Views will cycle every 30 seconds
 * Dynamic background will change based on the weather.
-* ![normal](assets/normal.gif)
+* ![normal](images/normal.gif)
 * ![cloudy](images/clouds.gif)
 * ![rain](images/rain.gif)
 * ![snow](images/snow.gif)
