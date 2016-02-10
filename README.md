@@ -16,3 +16,11 @@ The personal project is the final pair project in Module 3 at Turing. It's a Rai
 * implement a production quality user interface for office TV screens
 * optimize with caching, using background workers, and AJAX requests
 * complete with a partner over a period of 2 weeks
+
+### Features
+* Views will cycle every 30 seconds
+* Dynamic background will change based on the weather.
+* ![normal](images/normal.gif)
+* ![cloudy](images/clouds.gif)
+* ![rain](images/rain.gif)
+* ![snow](images/snow.gif)
