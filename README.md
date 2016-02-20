@@ -5,8 +5,6 @@
 
 An internal dashboard built for [Trelora](http://www.trelora.com/), a real estate company located in Denver, CO. The application displays transaction data, customer feedback, and agent rankings on office TVs. Pair Project. Private app for internal use.
 
-[Project Outline](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/self_directed_project.md)
-
 ### Instructions
 
 * clone the project in your terminal by running `git clone git@github.com:acareaga/trelora-leaderboard.git/ratinganimals.git`
