@@ -1,4 +1,7 @@
 # Trelora LeaderBoard
+![Office Dashboard](http://i1.wp.com/www.aaroncareaga.com/wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.56.23-AM.png?fit=945%2C591)
+
+## Description
 
 An internal dashboard built for [Trelora](http://www.trelora.com/), a real estate company located in Denver, CO. The application displays transaction data, customer feedback, and agent rankings on office TVs. Pair Project. Private app for internal use.
 
@@ -6,9 +9,11 @@ An internal dashboard built for [Trelora](http://www.trelora.com/), a real estat
 
 ### Instructions
 
-* clone the project in your terminal by running `git clone git@bitbucket.org:ratingsa/ratinganimals.git`
+* clone the project in your terminal by running `git clone git@github.com:acareaga/trelora-leaderboard.git/ratinganimals.git`
 * start the server with `rails s` and visit `http://localhost:3000` in your preferred browser
-* to run the tests, run `bundle exec rake test` in the terminal
+* to run the tests, run `rspec` in the terminal
+
+For display purpose only, API endpoints are secure.
 
 ### Areas of Focus
 
